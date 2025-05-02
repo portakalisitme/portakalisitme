@@ -75,11 +75,40 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!sliderContainer) return;
         
         if (viewportWidth <= 576) {
-            sliderContainer.style.height = '350px';
-        } else if (viewportWidth <= 768) {
             sliderContainer.style.height = '400px';
+        } else if (viewportWidth <= 768) {
+            sliderContainer.style.height = '450px';
         } else {
             sliderContainer.style.height = '550px';
+        }
+        
+        // Tüm slaytlarda görüntü ayarlarını düzenle
+        const slideImages = document.querySelectorAll('.slide-image');
+        slideImages.forEach(img => {
+            if (viewportWidth <= 768) {
+                img.style.objectFit = 'contain';
+                img.style.objectPosition = 'center';
+            } else {
+                img.style.objectFit = 'cover';
+                img.style.objectPosition = 'center';
+            }
+        });
+        
+        // Mobilde içerik yerleşimini ayarla
+        if (viewportWidth <= 768) {
+            const slideContents = document.querySelectorAll('.slide-content');
+            slideContents.forEach(content => {
+                content.style.textAlign = 'center';
+                content.style.right = '0';
+                content.style.left = '0';
+                content.style.maxWidth = '100%';
+                
+                // Başlık çizgisini ortala
+                const titleAfter = content.querySelector('.slide-title');
+                if (titleAfter) {
+                    titleAfter.style.margin = '0 auto 15px';
+                }
+            });
         }
     }
 
@@ -138,15 +167,21 @@ document.addEventListener('DOMContentLoaded', function() {
         
         sliderContainer.addEventListener('touchstart', function(e) {
             touchStartX = e.changedTouches[0].screenX;
+            
+            // Otomatik geçişi durdur
+            clearInterval(slideTimer);
         }, false);
         
         sliderContainer.addEventListener('touchend', function(e) {
             touchEndX = e.changedTouches[0].screenX;
             handleSwipe();
+            
+            // Otomatik geçişi yeniden başlat
+            startSlideTimer();
         }, false);
         
         function handleSwipe() {
-            const swipeThreshold = 50; // En az 50px kaydırılmalı
+            const swipeThreshold = 30; // Min. kaydırma mesafesi (daha duyarlı)
             const swipeDistance = touchEndX - touchStartX;
             
             if (Math.abs(swipeDistance) >= swipeThreshold) {

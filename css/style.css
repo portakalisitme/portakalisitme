@@ -302,8 +302,6 @@ nav ul li a:hover {
     list-style: none;
     margin: 20px 0 30px 0;
     padding: 0;
-    max-height: 200px;
-    overflow-y: auto;
 }
 
 .slide-features li {
@@ -1126,23 +1124,53 @@ footer {
         height: 450px;
     }
     
+    .slide img.slide-image {
+        object-fit: contain;
+        object-position: center;
+    }
+    
+    .slider-overlay {
+        background: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+    }
+    
     .slide-content {
-        right: 5%;
-        max-width: 70%;
-        top: 50%;
-        transform: translateY(-50%);
+        right: 0;
+        left: 0;
+        text-align: center;
+        max-width: 100%;
+        padding: 0 20px;
     }
     
     .slide-title {
         font-size: 32px;
+        margin: 0 auto 15px;
+    }
+    
+    .slide-title::after {
+        margin: 15px auto;
     }
     
     .slide-description {
         font-size: 16px;
+        margin: 0 auto 15px;
+    }
+    
+    .slide-features {
+        margin: 15px auto 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
     
     .slide-features li {
+        margin-bottom: 8px;
         font-size: 14px;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .slide .btn {
+        margin: 0 auto;
     }
     
     .slider-nav {
@@ -1151,20 +1179,6 @@ footer {
         opacity: 0.9;
         background-color: rgba(255, 127, 0, 0.8);
     }
-    
-    .slider-nav.prev {
-        left: 10px;
-    }
-    
-    .slider-nav.next {
-        right: 10px;
-    }
-    
-    .slider-logo {
-        width: 100px;
-        right: 20px;
-        bottom: 20px;
-    }
 }
 
 @media (max-width: 576px) {
@@ -1172,26 +1186,17 @@ footer {
         height: 400px;
     }
     
-    .slide-content {
-        right: 5%;
-        max-width: 80%;
-    }
-    
     .slide-title {
         font-size: 24px;
-    }
-    
-    .slide-title::after {
-        width: 100px;
-        margin: 10px 0;
     }
     
     .slide-description {
         font-size: 14px;
     }
     
-    .slide-features {
-        display: none;
+    .slide-features li {
+        font-size: 12px;
+        margin-bottom: 6px;
     }
     
     .slide .btn {
