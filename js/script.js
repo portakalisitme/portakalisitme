@@ -2,13 +2,19 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mobil cihaz kontrolü
     const isMobile = window.innerWidth < 768;
 
-    // Slider Fonksiyonu
+    // Normal Slider Fonksiyonu
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
-    const slideArrows = document.querySelectorAll('.slide-arrow');
     let currentSlide = 0;
     const slideInterval = isMobile ? 5000 : 7000; // Mobilde daha kısa sürede geçiş
     let slideTimer;
+    
+    // Mobil Slider Fonksiyonu
+    const mobileSlides = document.querySelectorAll('.mobile-slide');
+    const mobileDots = document.querySelectorAll('.mobile-dot');
+    let currentMobileSlide = 0;
+    let mobileSlideTimer;
+    const mobileSlideInterval = 5000;
 
     // Slider başlangıç ayarları
     function initSlider() {
@@ -53,110 +59,95 @@ document.addEventListener('DOMContentLoaded', function() {
         startSlideTimer();
         
         // Mobil cihazlarda slider yüksekliğini ayarla
-        adjustMobileSliderHeight();
+        adjustSliderHeight();
         
         // Ekran döndürme ve boyut değişikliğinde slider yüksekliğini ayarla
         window.addEventListener('resize', function() {
-            adjustMobileSliderHeight();
+            adjustSliderHeight();
             checkScreenSize();
         });
         
-        window.addEventListener('orientationchange', adjustMobileSliderHeight);
+        window.addEventListener('orientationchange', adjustSliderHeight);
         
         // Dokunmatik ekran desteği ekle
         setupTouchNavigation();
     }
-
-    // Mobil cihazlarda slider yüksekliğini düzenle
-    function adjustMobileSliderHeight() {
-        const viewportWidth = window.innerWidth;
-        const sliderContainer = document.querySelector('.slider-container');
-        
-        if (!sliderContainer) return;
-        
-        if (viewportWidth <= 576) {
-            sliderContainer.style.height = '400px';
-        } else if (viewportWidth <= 768) {
-            sliderContainer.style.height = '450px';
-        } else {
-            sliderContainer.style.height = '550px';
-        }
-        
-        // Tüm slaytlarda görüntü ayarlarını düzenle
-        const slideImages = document.querySelectorAll('.slide-image');
-        slideImages.forEach(img => {
-            if (viewportWidth <= 768) {
-                img.style.objectFit = 'contain';
-                img.style.objectPosition = 'center';
-                img.style.width = '100%';
-                img.style.maxWidth = '100%';
-                img.style.height = '100%';
-                
-                // Görselin tam ve eksiksiz gösterilmesi için ebeveyn elemanlarını düzenle
-                const slide = img.closest('.slide');
-                if (slide) {
-                    slide.style.overflow = 'visible';
-                }
-                
-                // Slider container'ı düzenle
-                sliderContainer.style.overflow = 'visible';
-            } else {
-                img.style.objectFit = 'cover';
-                img.style.objectPosition = 'center';
-            }
+    
+    // Mobil Slider başlangıç ayarları
+    function initMobileSlider() {
+        // Önce tüm slaytları gizle
+        mobileSlides.forEach(slide => {
+            slide.style.display = 'none';
         });
         
-        // Mobilde içerik yerleşimini ayarla
+        // İlk slaytı göster
+        if (mobileSlides.length > 0) {
+            mobileSlides[0].style.display = 'flex';
+            mobileSlides[0].classList.add('active');
+        }
+        
+        // Nokta navigasyonu için tıklama olayları ekle
+        mobileDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                goToMobileSlide(index);
+            });
+        });
+        
+        // Slider navigasyon butonları ekleme
+        const mobileSliderContainer = document.querySelector('.mobile-slider-container');
+        if (mobileSliderContainer) {
+            const prevButton = document.createElement('div');
+            const nextButton = document.createElement('div');
+            
+            prevButton.className = 'mobile-slider-nav prev';
+            nextButton.className = 'mobile-slider-nav next';
+            
+            prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            
+            mobileSliderContainer.appendChild(prevButton);
+            mobileSliderContainer.appendChild(nextButton);
+            
+            prevButton.addEventListener('click', prevMobileSlide);
+            nextButton.addEventListener('click', nextMobileSlide);
+        }
+        
+        // Otomatik slider başlat
+        startMobileSlideTimer();
+        
+        // Dokunmatik ekran desteği ekle
+        setupMobileTouchNavigation();
+    }
+
+    // Normal ve Mobil slider'ın yüksekliğini düzenle
+    function adjustSliderHeight() {
+        const viewportWidth = window.innerWidth;
+        const sliderContainer = document.querySelector('.slider-container');
+        const mobileSliderContainer = document.querySelector('.mobile-slider-container');
+        
+        if (!sliderContainer || !mobileSliderContainer) return;
+        
+        // Mobil cihazlarda mobil slider'ı göster, diğer koşullarda normal slider'ı göster
         if (viewportWidth <= 768) {
-            const slideContents = document.querySelectorAll('.slide-content');
-            slideContents.forEach(content => {
-                content.style.textAlign = 'center';
-                content.style.position = 'absolute';
-                content.style.bottom = '0';
-                content.style.left = '0';
-                content.style.right = '0';
-                content.style.top = 'auto';
-                content.style.transform = 'none';
-                content.style.maxWidth = '100%';
-                content.style.backgroundColor = 'rgba(0,0,0,0.6)';
-                content.style.zIndex = '10';
-                content.style.padding = viewportWidth <= 576 ? '15px' : '20px';
-                
-                // Başlık çizgisini ortala
-                const slideTitle = content.querySelector('.slide-title');
-                if (slideTitle) {
-                    slideTitle.style.margin = '0 auto 15px';
-                }
-                
-                // Açıklama metnini ortala
-                const slideDescription = content.querySelector('.slide-description');
-                if (slideDescription) {
-                    slideDescription.style.margin = '0 auto 15px';
-                }
-                
-                // Özellikleri ortala
-                const slideFeatures = content.querySelector('.slide-features');
-                if (slideFeatures) {
-                    slideFeatures.style.margin = '15px auto 20px';
-                    slideFeatures.style.display = 'flex';
-                    slideFeatures.style.flexDirection = 'column';
-                    slideFeatures.style.alignItems = 'center';
-                    
-                    // Özellik maddelerini düzenle
-                    const featureItems = slideFeatures.querySelectorAll('li');
-                    featureItems.forEach(item => {
-                        item.style.justifyContent = 'center';
-                        item.style.textAlign = 'center';
-                        item.style.fontSize = viewportWidth <= 576 ? '12px' : '14px';
-                        item.style.marginBottom = viewportWidth <= 576 ? '6px' : '8px';
-                    });
-                }
-                
-                // Butonu ortala
-                const button = content.querySelector('.btn');
-                if (button) {
-                    button.style.margin = '0 auto';
-                }
+            sliderContainer.style.display = 'none';
+            mobileSliderContainer.style.display = 'block';
+            
+            // Mobil slider yüksekliğini ayarla
+            if (viewportWidth <= 576) {
+                mobileSliderContainer.style.height = '460px'; // Updated for small screens
+            } else {
+                mobileSliderContainer.style.height = '480px'; // Updated for medium screens
+            }
+        } else {
+            sliderContainer.style.display = 'block';
+            mobileSliderContainer.style.display = 'none';
+            sliderContainer.style.height = '550px';
+            
+            // Tüm slaytlarda görüntü ayarlarını düzenle
+            const slideImages = document.querySelectorAll('.slide-image');
+            slideImages.forEach(img => {
+                img.style.objectFit = 'cover';
+                img.style.objectPosition = 'center';
             });
         }
     }
@@ -166,8 +157,14 @@ document.addEventListener('DOMContentLoaded', function() {
         clearInterval(slideTimer);
         slideTimer = setInterval(nextSlide, slideInterval);
     }
+    
+    // Mobil slider zamanlayıcısını başlat
+    function startMobileSlideTimer() {
+        clearInterval(mobileSlideTimer);
+        mobileSlideTimer = setInterval(nextMobileSlide, mobileSlideInterval);
+    }
 
-    // Belirli slide'a git
+    // Belirli slide'a git (normal slider)
     function goToSlide(index) {
         // Mevcut slaytı gizle
         slides[currentSlide].classList.remove('active');
@@ -194,18 +191,56 @@ document.addEventListener('DOMContentLoaded', function() {
         // Timer'ı yeniden başlat
         startSlideTimer();
     }
+    
+    // Belirli mobile slide'a git
+    function goToMobileSlide(index) {
+        // Mevcut slaytı gizle
+        mobileSlides[currentMobileSlide].classList.remove('active');
+        mobileSlides[currentMobileSlide].style.display = 'none';
+        mobileDots[currentMobileSlide].classList.remove('active');
+        
+        // Yeni slayt indeksini ayarla
+        currentMobileSlide = index;
+        
+        // Sınırları kontrol et
+        if (currentMobileSlide >= mobileSlides.length) {
+            currentMobileSlide = 0;
+        }
+        
+        if (currentMobileSlide < 0) {
+            currentMobileSlide = mobileSlides.length - 1;
+        }
+        
+        // Yeni slaytı göster
+        mobileSlides[currentMobileSlide].classList.add('active');
+        mobileSlides[currentMobileSlide].style.display = 'flex';
+        mobileDots[currentMobileSlide].classList.add('active');
+        
+        // Timer'ı yeniden başlat
+        startMobileSlideTimer();
+    }
 
-    // Önceki slide'a git
+    // Önceki slide'a git (normal slider)
     function prevSlide() {
         goToSlide(currentSlide - 1);
     }
 
-    // Sonraki slide'a git
+    // Sonraki slide'a git (normal slider)
     function nextSlide() {
         goToSlide(currentSlide + 1);
     }
+    
+    // Önceki mobile slide'a git
+    function prevMobileSlide() {
+        goToMobileSlide(currentMobileSlide - 1);
+    }
+    
+    // Sonraki mobile slide'a git
+    function nextMobileSlide() {
+        goToMobileSlide(currentMobileSlide + 1);
+    }
 
-    // Dokunmatik kaydırma desteği
+    // Dokunmatik kaydırma desteği (normal slider)
     function setupTouchNavigation() {
         const sliderContainer = document.querySelector('.slider-container');
         
@@ -244,6 +279,46 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     }
+    
+    // Dokunmatik kaydırma desteği (mobil slider)
+    function setupMobileTouchNavigation() {
+        const mobileSliderContainer = document.querySelector('.mobile-slider-container');
+        
+        if (!mobileSliderContainer) return;
+        
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        mobileSliderContainer.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            
+            // Otomatik geçişi durdur
+            clearInterval(mobileSlideTimer);
+        }, false);
+        
+        mobileSliderContainer.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+            
+            // Otomatik geçişi yeniden başlat
+            startMobileSlideTimer();
+        }, false);
+        
+        function handleSwipe() {
+            const swipeThreshold = 30; // Min. kaydırma mesafesi (daha duyarlı)
+            const swipeDistance = touchEndX - touchStartX;
+            
+            if (Math.abs(swipeDistance) >= swipeThreshold) {
+                if (swipeDistance < 0) {
+                    // Sola kaydırma
+                    nextMobileSlide();
+                } else {
+                    // Sağa kaydırma
+                    prevMobileSlide();
+                }
+            }
+        }
+    }
 
     // Mobile Menu Toggle ve Dropdown
     const menuButton = document.querySelector('.menu-button');
@@ -277,7 +352,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
+    
     // Mobil dropdown toggle
     dropdowns.forEach(dropdown => {
         const dropdownLink = dropdown.querySelector('a');
@@ -301,8 +376,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Sayfa yüklendiğinde slider'ı başlat
+    // Sayfa yüklendiğinde normal ve mobil slider'ı başlat
     initSlider();
+    initMobileSlider();
+    
+    // Sayfa yüklendiğinde slider görünümünü ayarla
+    adjustSliderHeight();
     
     // Görüntülerin doğru yüklenmesi için olay dinleyicileri ekle
     window.addEventListener('load', function() {
@@ -315,7 +394,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
         }
         
-        const slideImages = document.querySelectorAll('.slide-image');
+        const slideImages = document.querySelectorAll('.slide-image, .mobile-slide-image');
         
         slideImages.forEach(img => {
             // Eğer görüntü zaten yüklendiyse
@@ -337,9 +416,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         const sliderContainer = document.querySelector('.slider-container');
+        const mobileSliderContainer = document.querySelector('.mobile-slider-container');
+        
         if (sliderContainer) {
             sliderContainer.classList.add('images-loaded');
             sliderContainer.style.maxWidth = '100vw';
+        }
+        
+        if (mobileSliderContainer) {
+            mobileSliderContainer.classList.add('images-loaded');
         }
         
         document.body.style.overflowX = 'hidden';
@@ -359,6 +444,9 @@ document.addEventListener('DOMContentLoaded', function() {
             dropdowns.forEach(dropdown => dropdown.classList.remove('active'));
             document.body.style.overflow = '';
         }
+        
+        // Slider görünümünü ayarla
+        adjustSliderHeight();
         
         // Ürün kartları ve görüntüleri de güncelle
         centerProductImages();
@@ -740,12 +828,14 @@ document.head.insertAdjacentHTML('beforeend', `
     100% { transform: rotate(360deg); }
 }
 
-.slider-container.images-loaded .slide-image {
+.slider-container.images-loaded .slide-image,
+.mobile-slider-container.images-loaded .mobile-slide-image {
     opacity: 0.9;
 }
 
 /* Slider animasyonları */
-.slide-title, .slide-description, .slide-features, .slide .btn {
+.slide-title, .slide-description, .slide-features, .slide .btn,
+.mobile-slide-title, .mobile-slide-description, .mobile-slide-features, .mobile-slide .btn {
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
@@ -754,7 +844,11 @@ document.head.insertAdjacentHTML('beforeend', `
 .slide.active .slide-title, 
 .slide.active .slide-description, 
 .slide.active .slide-features, 
-.slide.active .btn {
+.slide.active .btn,
+.mobile-slide.active .mobile-slide-title,
+.mobile-slide.active .mobile-slide-description,
+.mobile-slide.active .mobile-slide-features,
+.mobile-slide.active .btn {
     opacity: 1;
     transform: translateY(0);
 }

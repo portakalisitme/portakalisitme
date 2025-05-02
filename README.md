@@ -1,77 +1,46 @@
 # Portakal İşitme Cihazları Web Sitesi
 
-Bu proje, Portakal İşitme Cihazları için geliştirilmiş modern ve profesyonel bir kurumsal web sitesidir. Tamamen mobil uyumlu, kullanıcı dostu ve SEO odaklı tasarlanmıştır.
+Bu repository, Portakal İşitme Cihazları için geliştirilen duyarlı (responsive) web sitesinin kaynak kodlarını içermektedir.
 
 ## Özellikler
 
-- **Tam Duyarlı Tasarım:** Tüm cihazlarda optimum görüntüleme deneyimi sağlar (mobil, tablet, masaüstü)
-- **Modern Slider:** Ürün ve markaları sergileyen tam genişlikli, animasyonlu slider
-- **Dinamik Navigasyon:** Mobil ve masaüstü için optimize edilmiş, alt menüleri destekleyen navigasyon
-- **Ürün Vitrinleri:** İşitme cihazı markalarını ve özelliklerini sergileyen görsel odaklı kartlar
-- **Kurumsal Bölüm:** Şirket misyonu, vizyonu ve hizmetleri hakkında bilgi
-- **Kullanıcı Etkileşimi:** Animasyonlar, hover efektleri ve etkileşimli UI öğeleri
-- **Performans Optimizasyonu:** Hızlı yükleme süreleri için optimize edilmiş görseller ve kodlar
-- **SEO Dostu:** Arama motorları için optimize edilmiş yapı ve içerik
+- Tam duyarlı (responsive) tasarım
+- Mobil ve masaüstü cihazlar için özel slider
+- Ürün kartları ve tanıtım içerikleri
+- Mobil dokunmatik gezinme desteği
+- Modern CSS animasyonları
 
-## Teknolojiler
-
-- HTML5
-- CSS3 (Flex layout, Grid, Animasyonlar)
-- JavaScript (Vanilla JS)
-- Font Awesome ikonları
-- Google Fonts
-- Duyarlı Tasarım İlkeleri
-
-## Klasör Yapısı
+## Dosya Yapısı
 
 ```
-.
-├── index.html                # Ana sayfa
-├── css/
-│   └── style.css             # Ana stil dosyası
-├── js/
-│   └── script.js             # JavaScript fonksiyonları
+portakal-web/
 ├── assets/
-│   └── images/               # Tüm görseller 
-│       ├── logo.png          # Site logosu
-│       ├── 1.png ~ 5.png     # Ürün görselleri
-│       ├── oticon.jpg        # Slider görselleri
-│       └── ...               # Diğer görseller
-└── README.md                 # Proje dökümantasyonu
+│   └── images/     # Tüm görseller
+├── css/
+│   └── style.css   # Ana stil dosyası
+├── js/
+│   └── script.js   # JavaScript işlevleri
+├── index.html      # Ana HTML dosyası
+└── README.md       # Bu dosya
 ```
 
 ## Kurulum
 
-1. Projeyi klonlayın:
+1. Repository'i bilgisayarınıza klonlayın:
 ```bash
-git clone https://github.com/yunusemreduran/portakal-web.git
+git clone https://github.com/KULLANICI_ADI/portakal-isitme-cihazlari.git
 ```
 
-2. Klasöre gidin:
-```bash
-cd portakal-web
-```
+2. `index.html` dosyasını bir web tarayıcısında açın.
 
-3. `index.html` dosyasını tarayıcınızda açarak web sitesini görüntüleyebilirsiniz.
+## Kullanılan Teknolojiler
 
-## Mobil Optimizasyonu
+- HTML5
+- CSS3
+- JavaScript (Vanilla)
+- Font Awesome 6.4.0
+- Google Fonts (Poppins)
 
-- Tüm ekran boyutları için özel olarak tasarlanmış duyarlı CSS
-- Mobil cihazlarda gelişmiş kullanıcı deneyimi
-- Performans odaklı görsel optimizasyonu
-- Dokunmatik ekranlar için optimize edilmiş UI elementleri
-- Tam ekran mobil menü
+## Lisans
 
-## Katkıda Bulunma
-
-1. Projeyi fork edin
-2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Harika özellik eklendi'`)
-4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
-5. Pull Request oluşturun
-
-## İletişim
-
-Yunus Emre Duran - [iamyunusemreduran@gmail.com](mailto:iamyunusemreduran@gmail.com)
-
-Proje Linki: [github.com/yunusemreduran/portakal-web](https://github.com/yunusemreduran/portakal-web)
+Bu proje özel kullanım için geliştirilmiştir ve tüm hakları saklıdır.
