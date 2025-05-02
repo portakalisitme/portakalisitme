@@ -1,142 +1,127 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Yükleme ekranı
-    const loaderOverlay = document.querySelector('.loader-overlay');
-    if (loaderOverlay) {
-        setTimeout(() => {
-            loaderOverlay.style.opacity = '0';
-            setTimeout(() => {
-                loaderOverlay.style.display = 'none';
-            }, 500);
-        }, 800);
-    }
-
     // Mobil cihaz kontrolü
     const isMobile = window.innerWidth < 768;
 
-    // Ana menü
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menu = document.querySelector('.menu');
-    
-    if (menuToggle && menu) {
-        menuToggle.addEventListener('click', function() {
-            this.classList.toggle('active');
-            menu.classList.toggle('active');
-            document.body.classList.toggle('menu-open');
+    // Slider Fonksiyonu
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const slideArrows = document.querySelectorAll('.slide-arrow');
+    let currentSlide = 0;
+    const slideInterval = isMobile ? 5000 : 7000; // Mobilde daha kısa sürede geçiş
+    let slideTimer;
+
+    // Slider başlangıç ayarları
+    function initSlider() {
+        slides.forEach((slide, index) => {
+            if (index === 0) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
         });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+            });
+        });
+
+        slideArrows.forEach(arrow => {
+            arrow.addEventListener('click', nextSlide);
+        });
+
+        // Slider navigasyon butonları ekleme
+        const sliderContainer = document.querySelector('.slider-container');
+        const prevButton = document.createElement('div');
+        const nextButton = document.createElement('div');
+        
+        prevButton.className = 'slider-nav prev';
+        nextButton.className = 'slider-nav next';
+        
+        prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+        nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+        
+        sliderContainer.appendChild(prevButton);
+        sliderContainer.appendChild(nextButton);
+        
+        prevButton.addEventListener('click', prevSlide);
+        nextButton.addEventListener('click', nextSlide);
+
+        // Otomatik slider başlat
+        startSlideTimer();
+        
+        // Mobil cihazlarda slider yüksekliğini ayarla
+        if (isMobile) {
+            adjustMobileSliderHeight();
+            // Ekran döndürme ve boyut değişikliğinde slider yüksekliğini ayarla
+            window.addEventListener('resize', adjustMobileSliderHeight);
+            window.addEventListener('orientationchange', adjustMobileSliderHeight);
+            
+            // Mobilde slider kaydırma desteği
+            setupMobileSlider();
+        }
     }
 
-    // Dropdown menüler için tıklama olayları
-    const dropdownToggleList = document.querySelectorAll('.dropdown-toggle');
-    
-    dropdownToggleList.forEach(toggle => {
-        toggle.addEventListener('click', function(e) {
-            e.preventDefault();
+    // Mobil cihazlarda slider yüksekliğini düzenle
+    function adjustMobileSliderHeight() {
+        const viewportWidth = window.innerWidth;
+        const sliderContainer = document.querySelector('.slider-container');
+        
+        if (viewportWidth <= 576) {
+            sliderContainer.style.height = '350px';
             
-            const parent = this.parentElement;
-            const dropdown = parent.querySelector('.dropdown-menu');
+            // Tüm slaytları aktif et
+            const activeSlide = document.querySelector('.slide.active');
+            if (activeSlide) {
+                const slideImages = document.querySelectorAll('.slide-image');
+                slideImages.forEach(img => {
+                    img.style.objectFit = 'contain';
+                    img.style.objectPosition = 'center';
+                });
+            }
+        } else if (viewportWidth <= 768) {
+            sliderContainer.style.height = '400px';
             
-            // Diğer açık dropdownları kapat
-            dropdownToggleList.forEach(otherToggle => {
-                if (otherToggle !== this) {
-                    otherToggle.parentElement.classList.remove('active');
+            // Tüm slaytları aktif et
+            const activeSlide = document.querySelector('.slide.active');
+            if (activeSlide) {
+                const slideImages = document.querySelectorAll('.slide-image');
+                slideImages.forEach(img => {
+                    img.style.objectFit = 'contain';
+                    img.style.objectPosition = 'center';
+                });
+            }
+        }
+    }
+
+    // Mobil cihazlarda kaydırılabilir slider ayarları
+    function setupMobileSlider() {
+        if (window.innerWidth <= 768) {
+            // Normal slider davranışına dönelim, kaydırma yerine
+            // Bu işlevi iptal ediyoruz
+            slides.forEach(slide => {
+                if (!slide.classList.contains('active')) {
+                    slide.style.display = 'none';
                 }
             });
             
-            parent.classList.toggle('active');
-        });
-    });
-
-    // Tıklanıldığında dropdown menüleri kapat
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown')) {
-            dropdownToggleList.forEach(toggle => {
-                toggle.parentElement.classList.remove('active');
+            // Navigasyon butonlarının görünürlüğünü arttır
+            const navButtons = document.querySelectorAll('.slider-nav');
+            navButtons.forEach(button => {
+                button.style.opacity = '1';
+                button.style.backgroundColor = '#ff7f00';
             });
         }
-    });
-
-    // Slider başlatma
-    initSlider();
-    
-    // Mobil cihazlarda slider yapısını değiştir
-    if (isMobile) {
-        setupMobileSlider();
     }
 
-    // Ürün görsellerini merkeze hizala
-    centerProductImages();
-    
-    // Sayfa yüklendiğinde ürün kartlarındaki görüntüleri ortala
-    window.addEventListener('load', centerProductImages);
-    
-    // Pencere yeniden boyutlandırıldığında ürün görsellerini tekrar ortala
-    window.addEventListener('resize', centerProductImages);
-    
-    // Mobil cihazlarda yüksekliği ayarla
-    if (isMobile) {
-        adjustMobileSliderHeight();
-        
-        // Ekran döndürme ve boyut değişikliğinde slider yüksekliğini ayarla
-        window.addEventListener('resize', adjustMobileSliderHeight);
-        window.addEventListener('orientationchange', adjustMobileSliderHeight);
-    }
-
-    // Animasyonlar için görünüm kontrolü
-    const sliderElements = document.querySelectorAll('.slide-title, .slide-description, .slide-features, .slide .btn');
-    
-    sliderElements.forEach((element) => {
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(20px)';
-        element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    });
-    
-    setTimeout(() => {
-        const currentSlideElements = document.querySelectorAll('.slide.active .slide-title, .slide.active .slide-description, .slide.active .slide-features, .slide.active .btn');
-        let delay = 0;
-        
-        currentSlideElements.forEach((element) => {
-            setTimeout(() => {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }, delay);
-            delay += 200;
-        });
-    }, 500);
-    
-    // Slide değişiminde animasyonları tekrarla
-    function resetAnimations() {
-        const allElements = document.querySelectorAll('.slide-title, .slide-description, .slide-features, .slide .btn');
-        allElements.forEach((element) => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-        });
-        
-        setTimeout(() => {
-            const currentElements = document.querySelectorAll('.slide.active .slide-title, .slide.active .slide-description, .slide.active .slide-features, .slide.active .btn');
-            let delay = 0;
-            
-            currentElements.forEach((element) => {
-                setTimeout(() => {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }, delay);
-                delay += 200;
+    // Mobil ekranlarda görünür slayta göre noktaları güncelle
+    function updateDots(index) {
+        if (dots.length > 0) {
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
             });
-        }, 100);
+        }
     }
-    
-    // Slide değişikliklerinde animasyonları güncelleyelim
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.attributeName === 'class' && mutation.target.classList.contains('active')) {
-                resetAnimations();
-            }
-        });
-    });
-    
-    slides.forEach((slide) => {
-        observer.observe(slide, { attributes: true });
-    });
 
     // Mobile Menu Toggle ve Dropdown
     const menuButton = document.querySelector('.menu-button');
@@ -207,6 +192,136 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', checkScreenSize);
     checkScreenSize();
 
+    // Slider zamanlayıcısını başlat
+    function startSlideTimer() {
+        clearInterval(slideTimer);
+        // Mobil cihazlarda daha kısa zamanlayıcı
+        const interval = window.innerWidth <= 768 ? 5000 : 7000;
+        slideTimer = setInterval(nextSlide, interval);
+    }
+
+    // Belirli slide'a git
+    function goToSlide(index) {
+        slides[currentSlide].classList.remove('active');
+        dots[currentSlide].classList.remove('active');
+        
+        currentSlide = index;
+        
+        if (currentSlide >= slides.length) {
+            currentSlide = 0;
+        }
+        
+        if (currentSlide < 0) {
+            currentSlide = slides.length - 1;
+        }
+        
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+        
+        // Animasyonları sıfırla
+        resetAnimations();
+        
+        // Timer'ı yeniden başlat
+        startSlideTimer();
+    }
+
+    // Önceki slide'a git
+    function prevSlide() {
+        goToSlide(currentSlide - 1);
+    }
+
+    // Sonraki slide'a git
+    function nextSlide() {
+        goToSlide(currentSlide + 1);
+    }
+
+    // Dokunmatik kaydırma desteği
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    const sliderContainer = document.querySelector('.slider-container');
+    
+    if (sliderContainer) {
+        sliderContainer.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, false);
+        
+        sliderContainer.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, false);
+        
+        function handleSwipe() {
+            if (touchEndX < touchStartX) {
+                // Sola kaydırma
+                nextSlide();
+            } else if (touchEndX > touchStartX) {
+                // Sağa kaydırma
+                prevSlide();
+            }
+        }
+    }
+
+    // Sayfa yüklendiğinde slider'ı başlat
+    initSlider();
+
+    // Animasyonlar için görünüm kontrolü
+    const sliderElements = document.querySelectorAll('.slide-title, .slide-description, .slide-features, .slide .btn');
+    
+    sliderElements.forEach((element) => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+    
+    setTimeout(() => {
+        const currentSlideElements = document.querySelectorAll('.slide.active .slide-title, .slide.active .slide-description, .slide.active .slide-features, .slide.active .btn');
+        let delay = 0;
+        
+        currentSlideElements.forEach((element) => {
+            setTimeout(() => {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, delay);
+            delay += 200;
+        });
+    }, 500);
+    
+    // Slide değişiminde animasyonları tekrarla
+    function resetAnimations() {
+        const allElements = document.querySelectorAll('.slide-title, .slide-description, .slide-features, .slide .btn');
+        allElements.forEach((element) => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+        });
+        
+        setTimeout(() => {
+            const currentElements = document.querySelectorAll('.slide.active .slide-title, .slide.active .slide-description, .slide.active .slide-features, .slide.active .btn');
+            let delay = 0;
+            
+            currentElements.forEach((element) => {
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, delay);
+                delay += 200;
+            });
+        }, 100);
+    }
+    
+    // Slide değişikliklerinde animasyonları güncelleyelim
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.attributeName === 'class' && mutation.target.classList.contains('active')) {
+                resetAnimations();
+            }
+        });
+    });
+    
+    slides.forEach((slide) => {
+        observer.observe(slide, { attributes: true });
+    });
+    
     // Scroll to top button
     window.addEventListener('scroll', function() {
         if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
@@ -279,6 +394,54 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', checkScroll);
     checkScroll(); // İlk yükleme kontrolü
+});
+
+// Sayfa tam yüklendiğinde yükleme ekranını kaldır
+window.addEventListener('load', function() {
+    const loaderOverlay = document.querySelector('.loader-overlay');
+    if (loaderOverlay) {
+        loaderOverlay.style.opacity = '0';
+        setTimeout(() => {
+            loaderOverlay.style.display = 'none';
+        }, 500);
+    }
+    
+    // Görüntülerin yüklenmesini bekleyin
+    const slideImages = document.querySelectorAll('.slide-image');
+    let loadedCount = 0;
+    
+    slideImages.forEach(img => {
+        if (img.complete) {
+            imageLoaded();
+        } else {
+            img.addEventListener('load', imageLoaded);
+            img.addEventListener('error', imageLoaded);
+        }
+    });
+    
+    function imageLoaded() {
+        loadedCount++;
+        if (loadedCount === slideImages.length) {
+            // Tüm görüntüler yüklendi
+            document.querySelector('.slider-container').classList.add('images-loaded');
+        }
+    }
+    
+    // Slider arka planını ayarla
+    const sliderContainer = document.querySelector('.slider-container');
+    sliderContainer.style.maxWidth = '100vw';
+    document.body.style.overflowX = 'hidden';
+    
+    // Ürün kartlarındaki görüntüleri ortalama
+    centerProductImages();
+    window.addEventListener('resize', centerProductImages);
+
+    // Ürün kartları büyütme özelliğini ayarla
+    setupProductCards();
+    window.addEventListener('resize', function() {
+        // Ekran boyutu değişirse ürün kartlarını yeniden ayarla
+        setupProductCards();
+    });
 });
 
 // Ürün kartlarındaki görüntüleri ortala
@@ -539,266 +702,4 @@ document.head.insertAdjacentHTML('beforeend', `
     transform: translateY(0);
 }
 </style>
-`);
-
-// Mobil cihazlar için özel slider yapısı
-function setupMobileSlider() {
-    const slides = document.querySelectorAll('.slide');
-    
-    // Yüksekliği ayarla
-    adjustMobileSliderHeight();
-    
-    slides.forEach(slide => {
-        // Görsel için bir konteyner oluştur
-        const slideImg = slide.querySelector('.slide-image');
-        
-        if (slideImg && !slide.querySelector('.slide-image-container')) {
-            // Slide içeriğini koru
-            const slideContent = slide.querySelector('.slide-content');
-            const slideOverlay = slide.querySelector('.slider-overlay');
-            const slideTitle = slide.querySelector('.slide-title');
-            
-            // Ana konteyner oluştur
-            const imgContainer = document.createElement('div');
-            imgContainer.className = 'slide-image-container';
-            
-            // Marka bilgisi için konteyner oluştur
-            const brandInfoContainer = document.createElement('div');
-            brandInfoContainer.className = 'slide-brand-info';
-            
-            // Görüntü için wrapper oluştur
-            const imageWrapper = document.createElement('div');
-            imageWrapper.className = 'slide-image-wrapper';
-            
-            // Görsel üstüne marka ve model bilgisi ekle
-            const brandName = slideTitle ? slideTitle.textContent.split(' ')[0] : '';
-            
-            if (brandName) {
-                const brandLogo = document.createElement('div');
-                brandLogo.className = 'slide-brand-logo';
-                brandLogo.textContent = brandName;
-                
-                const brandModel = document.createElement('div');
-                brandModel.className = 'slide-brand-model';
-                
-                // Marka modeli ekle (varsayılan olarak)
-                switch(brandName.toLowerCase()) {
-                    case 'phonak':
-                        brandModel.textContent = 'Audéo Paradise';
-                        break;
-                    case 'oticon':
-                        brandModel.textContent = 'More™ 3';
-                        break;
-                    case 'philips':
-                        brandModel.textContent = 'HearLink';
-                        break;
-                    case 'rexton':
-                        brandModel.textContent = 'BiCore M-Li';
-                        break;
-                    case 'unitron':
-                        brandModel.textContent = 'Discover Next';
-                        break;
-                    default:
-                        brandModel.textContent = 'Premium Series';
-                }
-                
-                // Marka bilgisi alanına ekle
-                brandInfoContainer.appendChild(brandLogo);
-                brandInfoContainer.appendChild(brandModel);
-            }
-            
-            // Görsel wrapper'a ekle
-            imageWrapper.appendChild(slideImg);
-            
-            // Ana konteynere içerikleri ekle
-            imgContainer.appendChild(brandInfoContainer);
-            imgContainer.appendChild(imageWrapper);
-            
-            // Slide içindeki DOM yapısını değiştir
-            slide.insertBefore(imgContainer, slideContent);
-            
-            // Tasarımı düzenle
-            if (slideOverlay) slideOverlay.style.display = 'none';
-        }
-    });
-    
-    // Ekran döndürme ve boyut değişikliğinde slider yüksekliğini ayarla
-    window.addEventListener('resize', adjustMobileSliderHeight);
-    window.addEventListener('orientationchange', adjustMobileSliderHeight);
-}
-
-// Mobil cihazlarda slider yüksekliğini düzenle
-function adjustMobileSliderHeight() {
-    const viewportWidth = window.innerWidth;
-    const sliderContainer = document.querySelector('.slider-container');
-    
-    if (viewportWidth <= 576) {
-        sliderContainer.style.height = 'auto';
-        
-        // Resim yüksekliğini ayarla
-        const slideImages = document.querySelectorAll('.slide-image');
-        slideImages.forEach(img => {
-            img.style.height = 'auto';
-            img.style.maxHeight = '200px';
-        });
-    } else if (viewportWidth <= 768) {
-        sliderContainer.style.height = 'auto';
-        
-        // Resim yüksekliğini ayarla
-        const slideImages = document.querySelectorAll('.slide-image');
-        slideImages.forEach(img => {
-            img.style.height = 'auto';
-            img.style.maxHeight = '250px';
-        });
-    }
-}
-
-// Slider başlangıç ayarları
-function initSlider() {
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let currentSlide = 0;
-    const isMobile = window.innerWidth < 768;
-    const slideInterval = isMobile ? 5000 : 7000; // Mobilde daha kısa sürede geçiş
-    let slideTimer;
-
-    slides.forEach((slide, index) => {
-        if (index === 0) {
-            slide.classList.add('active');
-        } else {
-            slide.classList.remove('active');
-        }
-    });
-
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            goToSlide(index);
-        });
-    });
-
-    // Slider navigasyon butonları ekleme
-    const sliderContainer = document.querySelector('.slider-container');
-    const prevButton = document.createElement('div');
-    const nextButton = document.createElement('div');
-    
-    prevButton.className = 'slider-nav prev';
-    nextButton.className = 'slider-nav next';
-    
-    prevButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
-    nextButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
-    
-    sliderContainer.appendChild(prevButton);
-    sliderContainer.appendChild(nextButton);
-    
-    prevButton.addEventListener('click', prevSlide);
-    nextButton.addEventListener('click', nextSlide);
-
-    // Otomatik slider başlat
-    startSlideTimer();
-    
-    // Dokunmatik kaydırma desteği
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    if (sliderContainer) {
-        sliderContainer.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        }, false);
-        
-        sliderContainer.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        }, false);
-        
-        function handleSwipe() {
-            if (touchEndX < touchStartX) {
-                // Sola kaydırma
-                nextSlide();
-            } else if (touchEndX > touchStartX) {
-                // Sağa kaydırma
-                prevSlide();
-            }
-        }
-    }
-    
-    // Slide değişiminde animasyonları tekrarla
-    function resetAnimations() {
-        const allElements = document.querySelectorAll('.slide-title, .slide-description, .slide-features, .slide .btn');
-        allElements.forEach((element) => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-        });
-        
-        setTimeout(() => {
-            const currentElements = document.querySelectorAll('.slide.active .slide-title, .slide.active .slide-description, .slide.active .slide-features, .slide.active .btn');
-            let delay = 0;
-            
-            currentElements.forEach((element) => {
-                setTimeout(() => {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }, delay);
-                delay += 200;
-            });
-        }, 100);
-    }
-    
-    // Slide değişikliklerinde animasyonları güncelleyelim
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.attributeName === 'class' && mutation.target.classList.contains('active')) {
-                resetAnimations();
-            }
-        });
-    });
-    
-    slides.forEach((slide) => {
-        observer.observe(slide, { attributes: true });
-    });
-    
-    // Slider zamanlayıcısını başlat
-    function startSlideTimer() {
-        clearInterval(slideTimer);
-        slideTimer = setInterval(nextSlide, slideInterval);
-    }
-    
-    // Belirli slide'a git
-    function goToSlide(index) {
-        slides[currentSlide].classList.remove('active');
-        dots[currentSlide].classList.remove('active');
-        
-        currentSlide = index;
-        
-        if (currentSlide >= slides.length) {
-            currentSlide = 0;
-        }
-        
-        if (currentSlide < 0) {
-            currentSlide = slides.length - 1;
-        }
-        
-        slides[currentSlide].classList.add('active');
-        dots[currentSlide].classList.add('active');
-        
-        // Animasyonları sıfırla
-        resetAnimations();
-        
-        // Timer'ı yeniden başlat
-        startSlideTimer();
-    }
-    
-    // Önceki slide'a git
-    function prevSlide() {
-        goToSlide(currentSlide - 1);
-    }
-    
-    // Sonraki slide'a git
-    function nextSlide() {
-        goToSlide(currentSlide + 1);
-    }
-    
-    // Fonksiyonları dışarı çıkaralım
-    window.goToSlide = goToSlide;
-    window.nextSlide = nextSlide;
-    window.prevSlide = prevSlide;
-} 
+`); 
