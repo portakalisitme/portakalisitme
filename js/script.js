@@ -88,6 +88,18 @@ document.addEventListener('DOMContentLoaded', function() {
             if (viewportWidth <= 768) {
                 img.style.objectFit = 'contain';
                 img.style.objectPosition = 'center';
+                img.style.width = '100%';
+                img.style.maxWidth = '100%';
+                img.style.height = '100%';
+                
+                // Görselin tam ve eksiksiz gösterilmesi için ebeveyn elemanlarını düzenle
+                const slide = img.closest('.slide');
+                if (slide) {
+                    slide.style.overflow = 'visible';
+                }
+                
+                // Slider container'ı düzenle
+                sliderContainer.style.overflow = 'visible';
             } else {
                 img.style.objectFit = 'cover';
                 img.style.objectPosition = 'center';
@@ -99,14 +111,51 @@ document.addEventListener('DOMContentLoaded', function() {
             const slideContents = document.querySelectorAll('.slide-content');
             slideContents.forEach(content => {
                 content.style.textAlign = 'center';
-                content.style.right = '0';
+                content.style.position = 'absolute';
+                content.style.bottom = '0';
                 content.style.left = '0';
+                content.style.right = '0';
+                content.style.top = 'auto';
+                content.style.transform = 'none';
                 content.style.maxWidth = '100%';
+                content.style.backgroundColor = 'rgba(0,0,0,0.6)';
+                content.style.zIndex = '10';
+                content.style.padding = viewportWidth <= 576 ? '15px' : '20px';
                 
                 // Başlık çizgisini ortala
-                const titleAfter = content.querySelector('.slide-title');
-                if (titleAfter) {
-                    titleAfter.style.margin = '0 auto 15px';
+                const slideTitle = content.querySelector('.slide-title');
+                if (slideTitle) {
+                    slideTitle.style.margin = '0 auto 15px';
+                }
+                
+                // Açıklama metnini ortala
+                const slideDescription = content.querySelector('.slide-description');
+                if (slideDescription) {
+                    slideDescription.style.margin = '0 auto 15px';
+                }
+                
+                // Özellikleri ortala
+                const slideFeatures = content.querySelector('.slide-features');
+                if (slideFeatures) {
+                    slideFeatures.style.margin = '15px auto 20px';
+                    slideFeatures.style.display = 'flex';
+                    slideFeatures.style.flexDirection = 'column';
+                    slideFeatures.style.alignItems = 'center';
+                    
+                    // Özellik maddelerini düzenle
+                    const featureItems = slideFeatures.querySelectorAll('li');
+                    featureItems.forEach(item => {
+                        item.style.justifyContent = 'center';
+                        item.style.textAlign = 'center';
+                        item.style.fontSize = viewportWidth <= 576 ? '12px' : '14px';
+                        item.style.marginBottom = viewportWidth <= 576 ? '6px' : '8px';
+                    });
+                }
+                
+                // Butonu ortala
+                const button = content.querySelector('.btn');
+                if (button) {
+                    button.style.margin = '0 auto';
                 }
             });
         }
