@@ -417,8 +417,10 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Mobil cihazda ürün kartlarının soldan başlamasını sağlayalım
         if(window.innerWidth <= 991) {
-            // Başlangıçta sıfır pozisyondan başlat
-            productCards.scrollLeft = 0;
+            // Başlangıçta sıfır pozisyondan başlat (setTimeout ile gecikmeli uygula)
+            setTimeout(() => {
+                productCards.scrollLeft = 0;
+            }, 100);
             
             // Dokunma hareketleri için destek ekleyelim
             let startX, scrollLeft;
@@ -484,6 +486,41 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Ürün kartları kaydırma işlevini başlat
     setupProductCardsScroll();
+    
+    // Sayfa tamamen yüklendiğinde ürün kartlarının başlangıç konumunu garantileyelim
+    window.addEventListener('load', function() {
+        // Ürün kartlarını başlangıçta sola hizala
+        const productCards = document.querySelector('.product-cards');
+        if (productCards && window.innerWidth <= 991) {
+            // İlk başta sıfırla
+            productCards.scrollLeft = 0;
+            
+            // Yüklenme sonrasında tekrar sıfırla (Bazı tarayıcıların scroll pozisyonunu hatırlaması için)
+            setTimeout(() => {
+                productCards.scrollLeft = 0;
+            }, 100);
+            
+            // Biraz daha bekleyip, DOM tam yerleştikten sonra tekrar sıfırla
+            setTimeout(() => {
+                productCards.scrollLeft = 0;
+                
+                // Ürün kartlarının görünürlüğünü güçlendir
+                const firstCard = productCards.querySelector('.product-card:first-child');
+                if (firstCard) {
+                    firstCard.style.opacity = '1';
+                }
+            }, 500);
+        }
+        setupProductCardsScroll();
+    });
+    
+    // DOMContentLoaded sonrasında da scrollLeft'i sıfırla (bazı durumlar için ek güvenlik)
+    document.addEventListener('DOMContentLoaded', function() {
+        const productCards = document.querySelector('.product-cards');
+        if (productCards && window.innerWidth <= 991) {
+            productCards.scrollLeft = 0;
+        }
+    });
     
     // Pencerenin yeniden boyutlandırılması durumunda ürün kartlarını yeniden düzenle
     window.addEventListener('resize', function() {

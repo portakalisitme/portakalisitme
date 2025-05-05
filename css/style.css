@@ -4078,10 +4078,12 @@ footer {
         -ms-overflow-style: none; /* IE ve Edge için scrollbar gizle */
         scroll-behavior: smooth;
         margin: 0;
-        padding: 15px 15px 15px 15px;
+        padding: 15px;
         width: 100%;
         position: relative;
         cursor: grab;
+        transform: translateX(0); /* Başlangıç pozisyonunu garanti edelim */
+        scroll-padding-left: 0; /* Sola kaydırırken kenar boşluğunu 0 yap */
     }
     
     .product-cards::-webkit-scrollbar {
@@ -4101,7 +4103,8 @@ footer {
     }
     
     .product-card:first-child {
-        margin-left: 0;
+        margin-left: 0; /* İlk kart için sol boşluğu sıfırla */
+        scroll-snap-align: start; /* Snap alignment'ı güçlendir */
     }
     
     .product-image {
