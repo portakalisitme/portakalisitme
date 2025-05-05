@@ -415,11 +415,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const productCards = document.querySelector('.product-cards');
         if (!productCards) return;
         
-        // Mobil cihazda ürün kartlarının soldan başlamasını sağlayalım
+        // Mobil cihazda ürün kartlarının orta karttan başlamasını sağlayalım (Philips)
         if(window.innerWidth <= 991) {
-            // Başlangıçta sıfır pozisyondan başlat (setTimeout ile gecikmeli uygula)
+            // Ürün kartlarının genişliğini ve kaç kart olduğunu belirle
+            const cardWidth = 280; // Her kartın genişliği (CSS'de tanımlandığı gibi)
+            const cardGap = 20; // Kartlar arası boşluk (CSS'de tanımlandığı gibi)
+            const cardCount = productCards.querySelectorAll('.product-card').length;
+            
+            // Philips kartının index'i (0 tabanlı dizide 2. eleman)
+            const philipsIndex = 2; 
+            
+            // Kartın tam olarak görüntülenmesi için kaydırma miktarı
+            // İlk iki kartı (Phonak ve Oticon) gösterme miktarı
+            const scrollOffset = (cardWidth + cardGap) * philipsIndex - 15; // Sol padding'i çıkar
+            
+            // Başlangıçta scrollLeft'i ayarla (Philips'i görünür yap)
             setTimeout(() => {
-                productCards.scrollLeft = 0;
+                productCards.scrollLeft = 0; // Önce sıfırla (bazı tarayıcılar için)
+                
+                // Ardından Philips'in pozisyonuna kaydır
+                setTimeout(() => {
+                    productCards.scrollLeft = scrollOffset;
+                }, 50);
             }, 100);
             
             // Dokunma hareketleri için destek ekleyelim
@@ -489,36 +506,54 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Sayfa tamamen yüklendiğinde ürün kartlarının başlangıç konumunu garantileyelim
     window.addEventListener('load', function() {
-        // Ürün kartlarını başlangıçta sola hizala
+        // Ürün kartlarını başlangıçta Philips'e hizala
         const productCards = document.querySelector('.product-cards');
         if (productCards && window.innerWidth <= 991) {
-            // İlk başta sıfırla
+            // Ürün kartlarının genişliğini ve Philips'in index'ini belirle
+            const cardWidth = 280;
+            const cardGap = 20;
+            const philipsIndex = 2;
+            
+            // Philips kartının pozisyonuna kaydır
+            const scrollOffset = (cardWidth + cardGap) * philipsIndex - 15;
+            
+            // İlk başta sıfırla ve sonra doğru pozisyona getir
             productCards.scrollLeft = 0;
             
-            // Yüklenme sonrasında tekrar sıfırla (Bazı tarayıcıların scroll pozisyonunu hatırlaması için)
+            // Kısa bir gecikme ile tam pozisyonu ayarla
             setTimeout(() => {
-                productCards.scrollLeft = 0;
-            }, 100);
-            
-            // Biraz daha bekleyip, DOM tam yerleştikten sonra tekrar sıfırla
-            setTimeout(() => {
-                productCards.scrollLeft = 0;
+                productCards.scrollLeft = scrollOffset;
                 
-                // Ürün kartlarının görünürlüğünü güçlendir
-                const firstCard = productCards.querySelector('.product-card:first-child');
-                if (firstCard) {
-                    firstCard.style.opacity = '1';
-                }
+                // Tüm kartları görünür hale getir
+                const allCards = productCards.querySelectorAll('.product-card');
+                allCards.forEach(card => {
+                    card.style.opacity = '1';
+                });
+            }, 150);
+            
+            // Biraz daha uzun bir gecikme ile tekrar kontrol et
+            setTimeout(() => {
+                productCards.scrollLeft = scrollOffset;
             }, 500);
         }
+        
         setupProductCardsScroll();
     });
     
-    // DOMContentLoaded sonrasında da scrollLeft'i sıfırla (bazı durumlar için ek güvenlik)
+    // DOMContentLoaded sonrasında da scrollLeft'i ayarla
     document.addEventListener('DOMContentLoaded', function() {
         const productCards = document.querySelector('.product-cards');
         if (productCards && window.innerWidth <= 991) {
-            productCards.scrollLeft = 0;
+            // Philips kartının pozisyonuna kaydır
+            const cardWidth = 280;
+            const cardGap = 20;
+            const philipsIndex = 2;
+            const scrollOffset = (cardWidth + cardGap) * philipsIndex - 15;
+            
+            // Gecikme ile pozisyonu ayarla
+            setTimeout(() => {
+                productCards.scrollLeft = scrollOffset;
+            }, 100);
         }
     });
     

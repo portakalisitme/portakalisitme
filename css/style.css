@@ -4071,19 +4071,20 @@ footer {
         display: flex;
         flex-wrap: nowrap;
         overflow-x: auto;
-        padding: 15px 0;
+        padding: 15px;
         gap: 20px;
         scroll-snap-type: x mandatory;
         scrollbar-width: none; /* Firefox için scrollbar gizle */
         -ms-overflow-style: none; /* IE ve Edge için scrollbar gizle */
         scroll-behavior: smooth;
         margin: 0;
-        padding: 15px;
         width: 100%;
         position: relative;
         cursor: grab;
-        transform: translateX(0); /* Başlangıç pozisyonunu garanti edelim */
-        scroll-padding-left: 0; /* Sola kaydırırken kenar boşluğunu 0 yap */
+        -webkit-overflow-scrolling: touch; /* iOS için dokunma desteği */
+        scroll-padding: 15px;
+        padding-right: 15px;
+        padding-left: 15px;
     }
     
     .product-cards::-webkit-scrollbar {
@@ -4093,18 +4094,20 @@ footer {
     .product-card {
         flex: 0 0 280px;
         min-width: 280px;
-        scroll-snap-align: start;
+        scroll-snap-align: center; /* Merkez noktaya göre snap yapma */
         margin-bottom: 0;
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         border-radius: 10px;
         overflow: hidden;
         background-color: #fff;
+        opacity: 1; /* Tüm kartlar baştan görünür olsun */
     }
     
-    .product-card:first-child {
-        margin-left: 0; /* İlk kart için sol boşluğu sıfırla */
-        scroll-snap-align: start; /* Snap alignment'ı güçlendir */
+    /* Tüm kartlara aynı özellikleri uygula */
+    .product-card:first-child,
+    .product-card:last-child {
+        scroll-snap-align: center;
     }
     
     .product-image {
@@ -4166,5 +4169,14 @@ footer {
         font-size: 13px;
         display: inline-block;
         width: auto;
+    }
+    
+    /* Kaydırma davranışını iyileştir */
+    /* Ekranın solunda ve sağında önbelleğe alınmış alanlar oluştur */
+    .product-cards::before,
+    .product-cards::after {
+        content: '';
+        width: 15px; /* Sol ve sağ kenarlarda boşluk */
+        flex: 0 0 auto;
     }
 }
