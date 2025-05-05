@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ff7f00">
+    <meta name="description" content="Portakal İşitme Cihazları - İşitme cihazı uygulaması, cihaz seçimi ve ayarlama hizmetlerimiz.">
+    <title>İşitme Cihazı Uygulaması - Portakal İşitme Cihazları</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .importance-points {
+            margin-top: 20px;
+        }
+        
+        .importance-list li {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        
+        .importance-list .fas {
+            color: #ff7f00;
+            font-size: 18px;
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+        
+        .importance-detail {
+            flex: 1;
+        }
+        
+        .importance-detail strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 18px;
+        }
+        
+        .importance-detail p {
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .importance-detail strong {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Yükleme Ekranı -->
+    <div class="loader-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Bölümü -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="contact-info">
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span><a href="tel:+905399273505">05399273505</a></span>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://wa.me/+905399273505" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.png" alt="Portakal İşitme Cihazları">
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#">KURUMSAL</a>
+                            <div class="dropdown-content">
+                                <a href="../kurumsal/hakkimizda.html">Hakkımızda</a>
+                                <a href="../kurumsal/tarihce.html">Tarihçe</a>
+                                <a href="../kurumsal/misyon-vizyon.html">Misyon & Vizyon</a>
+                                <a href="../kurumsal/kalite-politikamiz.html">Kalite Politikamız</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">MARKALARIMIZ</a>
+                            <div class="dropdown-content">
+                                <a href="../urunler/phonak.html">Phonak</a>
+                                <a href="../urunler/oticon.html">Oticon</a>
+                                <a href="../urunler/philips.html">Philips</a>
+                                <a href="../urunler/rexton.html">Rexton</a>
+                                <a href="../urunler/unitron.html">Unitron</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">ÇOCUKLAR İÇİN</a>
+                            <div class="dropdown-content">
+                                <a href="../cocuklar/oticon-play-px.html">Oticon Play PX</a>
+                                <a href="../cocuklar/phonak-sky-l.html">Phonak Sky L</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">HİZMETLER</a>
+                            <div class="dropdown-content">
+                                <a href="isitme-cihazi-uygulamasi.html">İşitme Cihazı Uygulaması</a>
+                                <a href="isitme-cihazi-tamiri.html">İşitme Cihazı Tamiri</a>
+                                <a href="kulak-kalibi.html">Kulak Kalıbı</a>
+                                <a href="aksesuar-yedek-parca.html">Aksesuar & Yedek Parça</a>
+                                <a href="isitme-testi.html">İşitme Testi</a>
+                            </div>
+                        </li>
+                        <li><a href="../iletisim.html">İLETİŞİM</a></li>
+                    </ul>
+                </nav>
+                <div class="menu-button">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sayfa Başlığı -->
+    <section class="page-header">
+        <div class="container">
+            <h1>İşitme Cihazı Uygulaması</h1>
+            <div class="breadcrumb">
+                <a href="../index.html">Ana Sayfa</a> > <a href="#">Hizmetler</a> > <span>İşitme Cihazı Uygulaması</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hizmet Detay İçeriği -->
+    <section class="service-detail-section">
+        <div class="container">
+            <!-- Giriş Bölümü -->
+            <div class="service-intro">
+                <div class="service-intro-content">
+                    <h2>İşitme Cihazı Uygulaması</h2>
+                    <p>İşitme cihazı uygulaması, kişinin işitme kaybına en uygun cihazın seçilip, kullanıcının ihtiyaçlarına göre programlanması sürecini kapsar. Portakal İşitme Cihazları olarak uzman odyologlarımız ve deneyimli ekibimizle, sizin için en uygun işitme cihazını seçerek kulağınıza en doğru şekilde uyguluyoruz.</p>
+                    
+                    <p>İşitme cihazı kullanımına başlamak, işitme kaybı yaşayan bireyler için hayat değiştirici bir adımdır. Doğru cihazın seçilmesi, kişiye özel ayarlanması ve kullanıcının bu sürece adapte olması, başarılı bir işitme rehabilitasyonu için kritik öneme sahiptir.</p>
+                </div>
+                <div class="service-intro-image">
+                    <img src="../assets/images/hizmetler/isitme-cihazi-uygulamasi.jpg" alt="İşitme Cihazı Uygulaması" class="main-service-image">
+                </div>
+            </div>
+
+            <!-- Hizmet Süreci -->
+            <div class="service-process">
+                <h2>İşitme Cihazı Uygulama Süreci</h2>
+                <p>Portakal İşitme Cihazları'nda işitme cihazı uygulaması aşağıdaki adımlarla gerçekleştirilir:</p>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <i class="fas fa-clipboard-check"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>Kapsamlı İşitme Değerlendirmesi</h3>
+                            <p>Uzman odyologlarımız tarafından detaylı işitme testleri yapılır. İşitme kaybının tipi, derecesi ve kişinin özel ihtiyaçları belirlenir.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>Danışmanlık ve Cihaz Seçimi</h3>
+                            <p>Test sonuçlarına göre uygun cihaz alternatifleri belirlenir. Kişinin ihtiyaçları, tercih ve bütçesi doğrultusunda en uygun işitme cihazı seçilir.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <i class="fas fa-hand-holding-medical"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>Kulak Kalıbı Alınması</h3>
+                            <p>Kulak arkası cihazlar için gerekli ise, kişiye özel kulak kalıbı alınır. Bu kalıplar, cihazın kulağa tam uyumunu ve maksimum konforu sağlar.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>Cihaz Programlaması</h3>
+                            <p>Seçilen işitme cihazı, kişinin işitme testine ve bireysel ihtiyaçlarına göre programlanır. Farklı dinleme ortamları için farklı programlar ayarlanabilir.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>Kullanım Eğitimi</h3>
+                            <p>Kullanıcıya işitme cihazının kullanımı, bakımı ve pil değişimi gibi konularda detaylı eğitim verilir. Ayrıca cihazın takılması ve çıkarılması da uygulamalı olarak gösterilir.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>Adaptasyon ve İnce Ayar</h3>
+                            <p>Kullanıcı belirli bir süre cihazı kullandıktan sonra deneyimi değerlendirilir ve gerekirse ince ayar yapılır. Bu süreç birkaç seans sürebilir.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-step">
+                        <div class="step-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="step-content">
+                            <h3>Takip ve Destek</h3>
+                            <p>Düzenli kontroller ile cihazın performansı ve kullanıcının memnuniyeti takip edilir. Kullanıcının ihtiyaçları değiştikçe cihaz ayarları güncellenir.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Önem Bölümü -->
+            <div class="service-importance">
+                <div class="importance-content">
+                    <h2>Doğru İşitme Cihazı Uygulamasının Önemi</h2>
+                    <p>İşitme cihazı sadece bir teknolojik alet değil, kullanıcının yaşam kalitesini doğrudan etkileyen bir çözümdür. Doğru cihaz seçimi ve uygulaması şu avantajları sağlar:</p>
+                    
+                    <div class="importance-points">
+                        <ul class="importance-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i> 
+                                <div class="importance-detail">
+                                    <strong>Maksimum İşitme Faydası:</strong> 
+                                    <p>Kişinin işitme kaybına özel olarak programlanan cihaz, en iyi işitme performansını sağlar.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> 
+                                <div class="importance-detail">
+                                    <strong>Konfor ve Uyum:</strong> 
+                                    <p>Kişiye özel yapılan uygulamalar, cihazın kulakta daha rahat oturmasını ve uzun süreli kullanım konforunu sağlar.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> 
+                                <div class="importance-detail">
+                                    <strong>Daha Hızlı Adaptasyon:</strong> 
+                                    <p>Profesyonel uygulama ve doğru ayarlar, kullanıcının cihaza daha hızlı alışmasını kolaylaştırır.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> 
+                                <div class="importance-detail">
+                                    <strong>Akustik Performans:</strong> 
+                                    <p>Doğru programlama, cihazın akustik performansını optimize ederek, geri bildirim (ıslık sesi) gibi sorunları en aza indirir.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i> 
+                                <div class="importance-detail">
+                                    <strong>Uzun Vadeli Memnuniyet:</strong> 
+                                    <p>Kullanıcının ihtiyaçlarına tam olarak uygun bir cihaz uygulaması, uzun vadeli kullanıcı memnuniyeti sağlar.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="importance-image">
+                    <img src="../assets/images/hizmetler/isitme-cihazi-uygulamasi-onemi.jpg" alt="İşitme Cihazı Uygulamasının Önemi">
+                </div>
+            </div>
+
+            <!-- Cihaz Türleri -->
+            <div class="service-types">
+                <h2>İşitme Cihazı Türleri</h2>
+                <p>Portakal İşitme Cihazları olarak, farklı işitme kaybı tipleri ve kullanıcı ihtiyaçlarına yönelik çeşitli işitme cihazı türleri sunuyoruz:</p>
+                
+                <div class="types-container">
+                    <div class="type-box">
+                        <div class="type-icon">
+                            <i class="fas fa-ear"></i>
+                        </div>
+                        <h3>Kulak Arkası (BTE)</h3>
+                        <p>Kulağın arkasına yerleşen, tüm yaş grupları ve işitme kaybı dereceleri için uygun olan geleneksel işitme cihazları.</p>
+                    </div>
+                    
+                    <div class="type-box">
+                        <div class="type-icon">
+                            <i class="fas fa-dot-circle"></i>
+                        </div>
+                        <h3>Kulak İçi (ITE)</h3>
+                        <p>Dış kulak yolunun girişine yerleştirilen, hafif ve orta dereceli işitme kayıpları için uygun cihazlar.</p>
+                    </div>
+                    
+                    <div class="type-box">
+                        <div class="type-icon">
+                            <i class="fas fa-circle"></i>
+                        </div>
+                        <h3>Kanal İçi (ITC)</h3>
+                        <p>Kulak kanalının içine yerleştirilen, daha az görünür ve hafif-orta derece işitme kayıpları için uygun cihazlar.</p>
+                    </div>
+                    
+                    <div class="type-box">
+                        <div class="type-icon">
+                            <i class="fas fa-circle-notch"></i>
+                        </div>
+                        <h3>Tamamen Kanal İçi (CIC)</h3>
+                        <p>Kulak kanalının derinliklerine yerleştirilen, neredeyse tamamen görünmez cihazlar.</p>
+                    </div>
+                    
+                    <div class="type-box">
+                        <div class="type-icon">
+                            <i class="fas fa-broadcast-tower"></i>
+                        </div>
+                        <h3>Açık Kulak (RIC)</h3>
+                        <p>İnce bir tüp ile kulak içine ses ileten, hafif ve kozmetik açıdan avantajlı cihazlar.</p>
+                    </div>
+                    
+                    <div class="type-box">
+                        <div class="type-icon">
+                            <i class="fas fa-battery-full"></i>
+                        </div>
+                        <h3>Şarj Edilebilir Cihazlar</h3>
+                        <p>Pil değiştirme ihtiyacını ortadan kaldıran, çevre dostu şarj edilebilir işitme cihazları.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sık Sorulan Sorular -->
+            <div class="service-faq">
+                <h2>Sık Sorulan Sorular</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>İşitme cihazı uygulaması ne kadar sürer?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>İlk uygulama randevusu genellikle 1-1.5 saat sürer. Bu süre içinde işitme testleri, cihaz seçimi ve ilk programlama yapılır. Adaptasyon süreci kişiye göre değişmekle birlikte, genellikle birkaç hafta içinde tamamlanır ve bu süreçte 2-3 kontrol randevusu gerekebilir.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Her işitme kaybı türü için işitme cihazı kullanılabilir mi?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Modern işitme cihazları çok çeşitli işitme kaybı tipleri ve dereceleri için çözüm sunabilmektedir. Hafif dereceden çok ileri dereceye kadar işitme kayıplarında farklı türde cihazlar kullanılabilir. Ancak bazı çok ileri dereceli veya özel durumlarda koklear implant gibi alternatif çözümler önerilebilir. Sizin için en uygun çözümü belirlemek için detaylı bir işitme değerlendirmesi yapılması gerekir.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>İşitme cihazına alışmak zor mudur?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>İşitme cihazına alışma süreci kişiden kişiye değişir. İşitme kaybının süresi, kişinin yaşı ve beklentileri adaptasyon sürecini etkileyen faktörlerdir. İlk kullanımda çevredeki sesler daha yüksek ve farklı gelebilir, ancak beyin zamanla bu yeni ses düzeyine uyum sağlar. Düzenli kullanım ve profesyonel destek ile genellikle 2-4 hafta içinde iyi bir adaptasyon sağlanabilir. Merkezimiz bu süreçte size tam destek sağlamaktadır.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>İşitme cihazım ne sıklıkla ayarlanmalı?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>İlk uygulamadan sonra adaptasyon sürecinde birkaç kez ayarlama yapılması gerekebilir. Bu genellikle ilk ay içinde 2-3 randevuyu kapsar. Adaptasyon sağlandıktan sonra, 6 aylık veya yıllık rutin kontrollerle cihazın performansı takip edilir. Ancak işitme durumunuzda değişiklik hissettiğinizde veya cihazla ilgili herhangi bir sorun yaşadığınızda her zaman ek bir ayarlama için başvurabilirsiniz.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>İşitme cihazı kullanımında dikkat edilmesi gereken hususlar nelerdir?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>İşitme cihazınızın uzun ömürlü olması ve iyi performans göstermesi için düzenli temizlik ve bakım önemlidir. Cihazınızı sudan ve aşırı nemden koruyun, uyumadan önce çıkarın, kullanmadığınızda pil kapağını açık bırakın ve belirli aralıklarla profesyonel bakım için merkezimize getirin. Ayrıca pil değişimlerinde temiz eller ve doğru boyutta pil kullanımına dikkat edin.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Randevu Bölümü -->
+            <div class="service-appointment">
+                <div class="appointment-content">
+                    <h2>İşitme Cihazı Uygulaması Randevusu Alın</h2>
+                    <p>Uzman odyologlarımız tarafından gerçekleştirilen işitme cihazı uygulaması için hemen randevu alın. İşitme kaybınıza en uygun cihazı seçerek, hayat kalitenizi artıralım.</p>
+                    <a href="../iletisim.html" class="btn appointment-btn">Randevu Al</a>
+                </div>
+                <div class="appointment-image">
+                    <img src="../assets/images/hizmetler/randevu-al.jpg" alt="İşitme Cihazı Randevu">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diğer Hizmetler -->
+    <section class="other-services">
+        <div class="container">
+            <h2>Diğer Hizmetlerimiz</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="../assets/images/hizmetler/isitme-testi.jpg" alt="İşitme Testi">
+                    <h3>İşitme Testi</h3>
+                    <p>Profesyonel odyologlarımız tarafından yapılan kapsamlı işitme testleri ile işitme sağlığınızı kontrol edin.</p>
+                    <a href="isitme-testi.html" class="btn service-btn">Detaylı Bilgi</a>
+                </div>
+                
+                <div class="service-card">
+                    <img src="../assets/images/hizmetler/isitme-cihazi-tamiri.jpg" alt="İşitme Cihazı Tamiri">
+                    <h3>İşitme Cihazı Tamiri</h3>
+                    <p>Her marka ve model işitme cihazı için profesyonel tamir ve bakım hizmetleri sunuyoruz.</p>
+                    <a href="isitme-cihazi-tamiri.html" class="btn service-btn">Detaylı Bilgi</a>
+                </div>
+                
+                <div class="service-card">
+                    <img src="../assets/images/hizmetler/kulak-kalibi.jpg" alt="Kulak Kalıbı">
+                    <h3>Kulak Kalıbı</h3>
+                    <p>Kişiye özel, konforlu ve maksimum performans sağlayan kulak kalıpları hazırlıyoruz.</p>
+                    <a href="kulak-kalibi.html" class="btn service-btn">Detaylı Bilgi</a>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Çağrı Bölümü -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>İŞİTME TESTİ İÇİN HEMEN BAŞVURUN</h2>
+                <p>Uzman ekibimiz tarafından yapılacak detaylı işitme testi ile işitme sağlığınızı kontrol edin.</p>
+                <a href="../iletisim.html" class="btn">Randevu Alın</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Bölümü -->
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-contact">
+                    <h3>Bir sorunuz mu var? Bizi 7/24 arayın</h3>
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span><a href="tel:+905399273505">05399273505</a></span>
+                    </div>
+                </div>
+                <div class="footer-info">
+                    <h4>İletişim Bilgileri</h4>
+                    <p>VARLIK MAHALLESİ 201 SOKAK AKIN APT, NO:7/B, 07050 Muratpaşa/Antalya</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d797.7510606250476!2d30.68011386965394!3d36.890246770861935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c391274932c685%3A0x242a58a2d384a602!2zUE9SVEFLQUwgxLDFnsSwVE1FIEPEsEhBWkxBUkk!5e0!3m2!1str!2str!4v1746216384232!5m2!1str!2str" width="80%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="footer-menu">
+                    <h4>Hızlı Menü</h4>
+                    <div class="footer-links">
+                        <div class="links-col">
+                            <ul>
+                                <li><a href="../kurumsal/hakkimizda.html">Hakkımızda</a></li>
+                                <li><a href="../urunler/phonak.html">Ürünlerimiz</a></li>
+                                <li><a href="../hizmetler/isitme-cihazi-uygulamasi.html">Hizmetlerimiz</a></li>
+                                <li><a href="../hizmetler/isitme-testi.html">İşitme Testi</a></li>
+                            </ul>
+                        </div>
+                        <div class="links-col">
+                            <ul>
+                                <li><a href="../iletisim.html">İletişim</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-work-hours">
+                    <h5>Çalışma Saatleri</h5>
+                    <p>Pazartesi - Cumartesi 09:00 - 18:00</p>
+                    <p>Pazar: Kapalı</p>
+                </div>
+                <div class="footer-copyright">
+                    <p>Copyright © 2023. Her Hakkı Saklıdır. Kopyalanması, çoğaltılması ve dağıtılması halinde yasal haklarımız işletilecektir.</p>
+                </div>
+                <div class="footer-sitemap">
+                    <a href="../sitemap.html">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+</body>
+</html> 

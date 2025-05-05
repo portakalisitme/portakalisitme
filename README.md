@@ -28,7 +28,7 @@ portakal-web/
 
 1. Repository'i bilgisayarınıza klonlayın:
 ```bash
-git clone https://github.com/KULLANICI_ADI/portakal-isitme-cihazlari.git
+git clone https://github.com/yunuseduran/portakal-web.git
 ```
 
 2. `index.html` dosyasını bir web tarayıcısında açın.

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ff7f00">
+    <meta name="description" content="Portakal İşitme Cihazları - Kuruluşundan bugüne tarihçemiz ve gelişim sürecimiz.">
+    <title>Tarihçe - Portakal İşitme Cihazları</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Lightbox stilleri */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            margin: auto;
+            padding: 0;
+            width: 80%;
+            max-width: 900px;
+            max-height: 80vh;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        #lightbox-image {
+            width: auto;
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+            margin: 0 auto;
+            border-radius: 4px;
+        }
+        
+        #lightbox-caption {
+            margin: 10px 0 0;
+            display: block;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            padding: 10px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            z-index: 1001;
+        }
+        
+        .lightbox-close:hover,
+        .lightbox-close:focus {
+            color: #ff7f00;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .about-image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+        
+        .about-image-gallery a {
+            width: calc(50% - 10px);
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .about-image-gallery a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+        
+        .about-image-gallery img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image-gallery a:hover img {
+            transform: scale(1.05);
+        }
+        
+        @keyframes fadeIn {
+            from {opacity: 0}
+            to {opacity: 1}
+        }
+        
+        @media (max-width: 768px) {
+            .lightbox-content {
+                width: 95%;
+            }
+            
+            .lightbox-close {
+                right: 20px;
+                top: 10px;
+            }
+            
+            .about-image-gallery a {
+                width: 100%;
+            }
+            
+            .about-image-gallery img {
+                height: 160px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Yükleme Ekranı -->
+    <div class="loader-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Bölümü -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="contact-info">
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span><a href="tel:+905399273505">05399273505</a></span>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://wa.me/+905399273505" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.png" alt="Portakal İşitme Cihazları">
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#">KURUMSAL</a>
+                            <div class="dropdown-content">
+                                <a href="hakkimizda.html">Hakkımızda</a>
+                                <a href="tarihce.html">Tarihçe</a>
+                                <a href="misyon-vizyon.html">Misyon & Vizyon</a>
+                                <a href="kalite-politikamiz.html">Kalite Politikamız</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">MARKALARIMIZ</a>
+                            <div class="dropdown-content">
+                                <a href="../urunler/phonak.html">Phonak</a>
+                                <a href="../urunler/oticon.html">Oticon</a>
+                                <a href="../urunler/philips.html">Philips</a>
+                                <a href="../urunler/rexton.html">Rexton</a>
+                                <a href="../urunler/unitron.html">Unitron</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">ÇOCUKLAR İÇİN</a>
+                            <div class="dropdown-content">
+                                <a href="../cocuklar/oticon-play-px.html">Oticon Play PX</a>
+                                <a href="../cocuklar/phonak-sky-l.html">Phonak Sky L</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">HİZMETLER</a>
+                            <div class="dropdown-content">
+                                <a href="../hizmetler/isitme-cihazi-uygulamasi.html">İşitme Cihazı Uygulaması</a>
+                                <a href="../hizmetler/isitme-cihazi-tamiri.html">İşitme Cihazı Tamiri</a>
+                                <a href="../hizmetler/kulak-kalibi.html">Kulak Kalıbı</a>
+                                <a href="../hizmetler/aksesuar-yedek-parca.html">Aksesuar & Yedek Parça</a>
+                                <a href="../hizmetler/isitme-testi.html">İşitme Testi</a>
+                            </div>
+                        </li>
+                        <li><a href="../iletisim.html">İLETİŞİM</a></li>
+                    </ul>
+                </nav>
+                <div class="menu-button">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sayfa Başlığı -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Tarihçe</h1>
+            <div class="breadcrumb">
+                <a href="../index.html">Ana Sayfa</a> > <a href="#">Kurumsal</a> > <span>Tarihçe</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tarihçe İçeriği -->
+    <section class="about-page-section">
+        <div class="container">
+            <div class="about-content-wrapper">
+                <div class="about-text-content">
+                    <h2>Portakal İşitme Cihazları Tarihçesi</h2>
+                    <p>2018 yılında Antalya'da Muratpaşa ilçesinde, bir işitme merkezi olarak kurulan Portakal İşitme Cihazları, kurucumuz Abdurrahman Körk'ün odyoloji ve işitme sağlığı alanındaki tutkusu ile yola çıkmıştır. Yerel bir işletme olmamıza rağmen, işitme engelli bireylere sunduğumuz kişiselleştirilmiş hizmet anlayışı ve profesyonel yaklaşımımız sayesinde, Antalya'nın en güvenilir işitme merkezi olmayı başardık.</p>
+                    
+                    <div class="values-section">
+                        <h2>Gelişim Sürecimizde Önemli Dönüm Noktaları</h2>
+                        <div class="process-steps">
+                            <div class="process-step">
+                                <div class="step-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h3>1998: Sektöre İlk Adım</h3>
+                                    <p>Kurucumuz Abdurrahman Körk, odyoloji alanında 25 yılı aşkın deneyime sahiptir. Sektördeki büyük zincir mağazaların aksine, her müşteriye özel ve samimi bir hizmet sunmayı tercih etmiştir. Abdurrahman Bey'in "az ama öz" felsefesi, mağazamızın temel değerini oluşturma vizyonu ile 1998 yılında işitme sağlığı sektörüne adım attık.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-icon">
+                                    <i class="fas fa-clinic-medical"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h3>2018: Portakal İşitme Cihazları Açılışı</h3>
+                                    <p>Sektördeki uzun yıllar deneyimleri ile birlikte, işitme sağlığı alanında yeni bir merkez açma kararı aldık. Antalya'nın en güvenilir işitme merkezi olmayı başarmak için 2018 yılında Portakal İşitme Cihazları adını verdiğimiz bu yeni merkezimizi açtık.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="process-step">
+                                <div class="step-icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <div class="step-content">
+                                    <h3>2019: Marka İşbirlikleri</h3>
+                                    <p>Portakal İşitme Cihazları, Phonak, Oticon, Philips, Rexton ve Unitron gibi dünyanın önde gelen işitme cihazı üreticilerinin yetkili satıcısı olduk. Bu sayede müşterilerimize en kaliteli ve teknolojik ürünleri sunmaya başladık.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3>Kurucumuzun Vizyonu</h3>
+                    <p>Portakal İşitme Cihazları'nın kurucusu Abdurrahman Körk, odyoloji alanında 25 yılı aşkın deneyime sahiptir. Sektördeki büyük zincir mağazaların aksine, her müşteriye özel ve samimi bir hizmet sunmayı tercih etmiştir. Abdurrahman Bey'in "az ama öz" felsefesi, mağazamızın temel değerini oluşturmaktadır.</p>
+                    
+                    <blockquote class="founder-quote">
+                        <p>"İşitme sağlığı alanında büyük bir zincir olmaktansa, her müşterisini tanıyan, onların ihtiyaçlarını bilen ve kişiye özel çözümler üreten butik bir merkez olmayı tercih ettik. Bu yaklaşımımız sayesinde müşterilerimizle aramızda güvene dayalı, uzun soluklu ilişkiler kurduk. İşitme cihazı sadece bir teknolojik ürün değil, kişinin hayat kalitesini doğrudan etkileyen bir çözümdür. Bu bilinçle her hastamıza, aile üyelerimize gösterdiğimiz özeni gösteriyoruz."</p>
+                        <cite>- Abdurrahman Körk, Kurucu ve İşitme Uzmanı</cite>
+                    </blockquote>
+                </div>
+                
+                <div class="about-image-wrapper">
+                    <img src="../assets/images/kurumsal/tarihce.jpg" alt="Portakal İşitme Tarihçe" class="about-main-image">
+                    
+                    <div class="about-stats-section">
+                        <h3>Rakamlarla Portakal İşitme</h3>
+                        <div class="stats-container">
+                            <div class="stat-box">
+                                <i class="fas fa-store"></i>
+                                <div class="stat-number">1</div>
+                                <div class="stat-title">Mağaza</div>
+                            </div>
+                            
+                            <div class="stat-box">
+                                <i class="fas fa-users"></i>
+                                <div class="stat-number">4</div>
+                                <div class="stat-title">Uzman Çalışan</div>
+                            </div>
+                            
+                            <div class="stat-box">
+                                <i class="fas fa-headphones"></i>
+                                <div class="stat-number">1200+</div>
+                                <div class="stat-title">Satılan İşitme Cihazı</div>
+                            </div>
+                            
+                            <div class="stat-box">
+                                <i class="fas fa-user-check"></i>
+                                <div class="stat-number">1000+</div>
+                                <div class="stat-title">Mutlu Müşteri</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-image-gallery">
+                        <a href="../assets/images/kurumsal/portakal-ofis.jpg" class="gallery-link" data-title="İlk Mağazamız - 2005">
+                            <img src="../assets/images/kurumsal/portakal-ofis.jpg" alt="Mağazamız - 2005">
+                        </a>
+                        <a href="../assets/images/kurumsal/ekibimiz.jpg" class="gallery-link" data-title="Uzman Ekibimiz">
+                            <img src="../assets/images/kurumsal/ekibimiz.jpg" alt="Uzman Ekibimiz">
+                        </a>
+                        <a href="../assets/images/kurumsal/ortak.jpg" class="gallery-link" data-title="Marka İşbirlikleri - 2008">
+                            <img src="../assets/images/kurumsal/ortak.jpg" alt="Marka İşbirlikleri - 2008">
+                        </a>
+                        <a href="../assets/images/kurumsal/magaza.jpg" class="gallery-link" data-title="Yeni Mağazamız - 2015">
+                            <img src="../assets/images/kurumsal/magaza.jpg" alt="Yeni Mağazamız - 2015">
+                        </a>
+                    </div>
+                    
+                    <!-- Lightbox -->
+                    <div id="gallery-lightbox" class="lightbox">
+                        <span class="lightbox-close">&times;</span>
+                        <div class="lightbox-content">
+                            <img id="lightbox-image">
+                            <div id="lightbox-caption"></div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Çağrı Bölümü -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>KİŞİYE ÖZEL PROFESYONEL HİZMET İÇİN</h2>
+                <p>Uzman ekibimiz, işitme sağlığınızı iyileştirmek için butik çözümler sunuyor.</p>
+                <a href="../iletisim.html" class="btn">Randevu Alın</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Bölümü -->
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-contact">
+                    <h3>Bir sorunuz mu var? Bizi 7/24 arayın</h3>
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span><a href="tel:+905399273505">05399273505</a></span>
+                    </div>
+                </div>
+                <div class="footer-info">
+                    <h4>İletişim Bilgileri</h4>
+                    <p>VARLIK MAHALLESİ 201 SOKAK AKIN APT, NO:7/B, 07050 Muratpaşa/Antalya</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d797.7510606250476!2d30.68011386965394!3d36.890246770861935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c391274932c685%3A0x242a58a2d384a602!2zUE9SVEFLQUwgxLDFnsSwVE1FIEPEsEhBWkxBUkk!5e0!3m2!1str!2str!4v1746216384232!5m2!1str!2str" width="80%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="footer-menu">
+                    <h4>Hızlı Menü</h4>
+                    <div class="footer-links">
+                        <div class="links-col">
+                            <ul>
+                                <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                                <li><a href="../urunler/phonak.html">Ürünlerimiz</a></li>
+                                <li><a href="../hizmetler/isitme-cihazi-uygulamasi.html">Hizmetlerimiz</a></li>
+                                <li><a href="../hizmetler/isitme-testi.html">İşitme Testi</a></li>
+                            </ul>
+                        </div>
+                        <div class="links-col">
+                            <ul>
+                                <li><a href="../iletisim.html">İletişim</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-work-hours">
+                    <h5>Çalışma Saatleri</h5>
+                    <p>Pazartesi - Cumartesi 09:00 - 18:00</p>
+                    <p>Pazar: Kapalı</p>
+                </div>
+                <div class="footer-copyright">
+                    <p>Copyright © 2023. Her Hakkı Saklıdır. Kopyalanması, çoğaltılması ve dağıtılması halinde yasal haklarımız işletilecektir.</p>
+                </div>
+                <div class="footer-sitemap">
+                    <a href="../sitemap.html">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    
+    <script>
+        // Lightbox fonksiyonları
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = document.getElementById('gallery-lightbox');
+            const lightboxImg = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const lightboxClose = document.querySelector('.lightbox-close');
+            const galleryLinks = document.querySelectorAll('.gallery-link');
+            
+            // Galeri görsellerine tıklandığında
+            galleryLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Görsel kaynağını ve başlığını al
+                    const imgSrc = this.getAttribute('href');
+                    const imgTitle = this.getAttribute('data-title');
+                    
+                    // Lightbox'ı göster
+                    lightbox.style.display = 'block';
+                    lightboxImg.src = imgSrc;
+                    lightboxCaption.textContent = imgTitle;
+                    
+                    // Scroll'u devre dışı bırak
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Çarpı işaretine tıklandığında lightbox'ı kapat
+            lightboxClose.addEventListener('click', function() {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Lightbox dışındaki bir yere tıklandığında kapat
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    lightbox.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // ESC tuşuna basıldığında kapat
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.style.display === 'block') {
+                    lightbox.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

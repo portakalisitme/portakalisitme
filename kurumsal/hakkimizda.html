@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#ff7f00">
+    <meta name="description" content="Portakal İşitme Cihazları - Hakkımızda sayfası. Firmamızın kurumsal bilgileri, misyonumuz ve vizyonumuz.">
+    <title>Hakkımızda - Portakal İşitme Cihazları</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .importance-points {
+            margin-top: 20px;
+        }
+        
+        .importance-list li {
+            display: flex;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        
+        .importance-list .fas {
+            color: #ff7f00;
+            font-size: 18px;
+            margin-right: 15px;
+            margin-top: 3px;
+        }
+        
+        .importance-detail {
+            flex: 1;
+        }
+        
+        .importance-detail strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-size: 18px;
+        }
+        
+        .importance-detail p {
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .importance-detail strong {
+                font-size: 16px;
+            }
+        }
+        
+        /* Sertifikalar ve İşbirliklerimiz bölümü için eklenen stiller */
+        .about-certificates {
+            margin-top: 60px;
+            padding: 40px 0;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+        }
+        
+        .about-certificates h3 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        
+        .certificates-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .certificate-item {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 200px;
+        }
+        
+        .certificate-item img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 3/4;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            object-fit: cover;
+            background-color: #fff;
+            border-radius: 4px;
+        }
+        
+        .certificate-item img:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .certificate-item figcaption {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #333;
+            font-size: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .about-certificates {
+                margin-top: 40px;
+                padding: 30px 0;
+            }
+            
+            .certificates-container {
+                gap: 20px;
+            }
+            
+            .certificate-item {
+                width: 160px;
+            }
+            
+            .certificate-item figcaption {
+                font-size: 14px;
+            }
+            
+            .about-certificates h3 {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+        }
+        
+        /* Lightbox stilleri */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+            animation: fadeIn 0.3s;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            margin: auto;
+            padding: 0;
+            width: 80%;
+            max-width: 900px;
+            max-height: 80vh;
+            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        #lightbox-image {
+            width: auto;
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+            margin: 0 auto;
+            border-radius: 4px;
+        }
+        
+        #lightbox-caption {
+            margin: 10px 0 0;
+            display: block;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            padding: 10px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            z-index: 1001;
+        }
+        
+        .lightbox-close:hover,
+        .lightbox-close:focus {
+            color: #ff7f00;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .certificate-link {
+            cursor: pointer;
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from {opacity: 0}
+            to {opacity: 1}
+        }
+        
+        @media (max-width: 768px) {
+            .lightbox-content {
+                width: 95%;
+            }
+            
+            .lightbox-close {
+                right: 20px;
+                top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Yükleme Ekranı -->
+    <div class="loader-overlay">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header Bölümü -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="contact-info">
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span><a href="tel:+905399273505">05399273505</a></span>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://wa.me/+905399273505" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../assets/images/logo.png" alt="Portakal İşitme Cihazları">
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#">KURUMSAL</a>
+                            <div class="dropdown-content">
+                                <a href="hakkimizda.html">Hakkımızda</a>
+                                <a href="tarihce.html">Tarihçe</a>
+                                <a href="misyon-vizyon.html">Misyon & Vizyon</a>
+                                <a href="kalite-politikamiz.html">Kalite Politikamız</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">MARKALARIMIZ</a>
+                            <div class="dropdown-content">
+                                <a href="../urunler/phonak.html">Phonak</a>
+                                <a href="../urunler/oticon.html">Oticon</a>
+                                <a href="../urunler/philips.html">Philips</a>
+                                <a href="../urunler/rexton.html">Rexton</a>
+                                <a href="../urunler/unitron.html">Unitron</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">ÇOCUKLAR İÇİN</a>
+                            <div class="dropdown-content">
+                                <a href="../cocuklar/oticon-play-px.html">Oticon Play PX</a>
+                                <a href="../cocuklar/phonak-sky-l.html">Phonak Sky L</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">HİZMETLER</a>
+                            <div class="dropdown-content">
+                                <a href="../hizmetler/isitme-cihazi-uygulamasi.html">İşitme Cihazı Uygulaması</a>
+                                <a href="../hizmetler/isitme-cihazi-tamiri.html">İşitme Cihazı Tamiri</a>
+                                <a href="../hizmetler/kulak-kalibi.html">Kulak Kalıbı</a>
+                                <a href="../hizmetler/aksesuar-yedek-parca.html">Aksesuar & Yedek Parça</a>
+                                <a href="../hizmetler/isitme-testi.html">İşitme Testi</a>
+                            </div>
+                        </li>
+                        <li><a href="../iletisim.html">İLETİŞİM</a></li>
+                    </ul>
+                </nav>
+                <div class="menu-button">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sayfa Başlığı -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Hakkımızda</h1>
+            <div class="breadcrumb">
+                <a href="../index.html">Ana Sayfa</a> > <a href="#">Kurumsal</a> > <span>Hakkımızda</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hakkımızda İçeriği -->
+    <section class="about-page-section">
+        <div class="container">
+            <div class="about-content-wrapper">
+                <div class="about-text-content">
+                    <h2>Portakal İşitme Cihazları</h2>
+                    <p>Portakal İşitme Cihazları olarak 2005 yılından bu yana işitme sağlığı alanında hizmet vermekteyiz. Antalya'da başlayan yolculuğumuz, bugün Türkiye'nin farklı şehirlerinde hizmet veren şubelerimizle devam etmektedir.</p>
+                    
+                    <p>Uzman kadromuz ve geniş ürün yelpazemizle, her yaştan ve her ihtiyaçtan hastamıza en kaliteli hizmeti sunmak için çalışıyoruz. İşitme sağlığı alanında dünya lideri markaların Türkiye yetkili distribütörü olarak, hastalarımıza en gelişmiş teknolojileri sunuyoruz.</p>
+                    
+                    <h3>Değerlerimiz</h3>
+                    <div class="importance-points">
+                        <ul class="importance-list">
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <div class="importance-detail">
+                                    <strong>Uzmanlık:</strong>
+                                    <p>Alanında uzman ve deneyimli kadromuzla en doğru tedaviyi sunuyoruz.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <div class="importance-detail">
+                                    <strong>Kalite:</strong>
+                                    <p>Sadece en kaliteli ve güvenilir markaların ürünlerini sunuyoruz.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <div class="importance-detail">
+                                    <strong>Güven:</strong>
+                                    <p>Hastalarımızla kurduğumuz güven ilişkisi en değerli varlığımızdır.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <div class="importance-detail">
+                                    <strong>Yenilikçilik:</strong>
+                                    <p>Teknolojik gelişmeleri takip ederek en yeni çözümleri sunuyoruz.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle"></i>
+                                <div class="importance-detail">
+                                    <strong>Empati:</strong>
+                                    <p>Her hastamızın ihtiyacını anlayarak kişiye özel çözümler sunuyoruz.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <p>İşitme cihazı uygulamaları, işitme testleri, işitme cihazı tamiri, kulak kalıbı ve işitme cihazı aksesuarları gibi geniş bir hizmet yelpazesi sunmaktayız. Amacımız, işitme kaybı yaşayan bireylerin hayat kalitesini en üst düzeye çıkarmak ve onların sosyal yaşamlarında aktif rol almalarını sağlamaktır.</p>
+                </div>
+                
+                <div class="about-image-wrapper">
+                    <!-- Buraya şirket binası, ekip veya ofis görüntüsü gelecek -->
+                     
+                    <img src="../assets/images/kurumsal/portakal-ofis.jpg" alt="Portakal İşitme Cihazları Ofisi" class="about-main-image">
+                    
+                    <div class="about-image-gallery">
+                        <!-- Buraya şirkete ait 3 görselden oluşan mini galeri gelecek -->
+                        <img src="../assets/images/kurumsal/portakal-ofis.jpg" alt="Uzman Ekibimiz">
+                        <img src="../assets/images/kurumsal/portakal-ofis.jpg" alt="Modern Ofisimiz">
+                        <img src="../assets/images/kurumsal/portakal-ofis.jpg" alt="Kaliteli Hizmet">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-stats-section">
+                <h3>Rakamlarla Portakal İşitme Cihazları</h3>
+                <div class="stats-container">
+                    <div class="stat-box">
+                        <i class="fas fa-user-md"></i>
+                        <div class="stat-number">4+</div>
+                        <div class="stat-title">Uzman Personel</div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-calendar-check"></i>
+                        <div class="stat-number">25+</div>
+                        <div class="stat-title">Yıllık Deneyim</div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-users"></i>
+                        <div class="stat-number">1,000+</div>
+                        <div class="stat-title">Mutlu Hasta</div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="stat-number">1</div>
+                        <div class="stat-title">Şube</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="about-certificates">
+                <h3>Sertifikalarımız ve İşbirliklerimiz</h3>
+                <div class="certificates-container">
+                    <figure class="certificate-item">
+                        <a href="../assets/images/kurumsal/kalite-sertifikasi.jpg" class="certificate-link" data-title="ISO 9001 Kalite Sertifikası">
+                            <img src="../assets/images/kurumsal/kalite-sertifikasi.jpg" alt="ISO 9001 Kalite Yönetim Sistemi Sertifikası">
+                        </a>
+                        <figcaption>ISO 9001 Kalite Sertifikası</figcaption>
+                    </figure>
+                    
+                    <figure class="certificate-item">
+                        <a href="../assets/images/kurumsal/kalite-sertifikasi-3.jpg" class="certificate-link" data-title="TSE Hizmet Yeterlilik Belgesi">
+                            <img src="../assets/images/kurumsal/kalite-sertifikasi-3.jpg" alt="TSE Hizmet Yeterlilik Belgesi">
+                        </a>
+                        <figcaption>TSE Hizmet Yeterlilik Belgesi</figcaption>
+                    </figure>
+                    
+                    <figure class="certificate-item">
+                        <a href="../assets/images/kurumsal/kalite-sertifikasi-2.jpg" class="certificate-link" data-title="Phonak Premium Partner">
+                            <img src="../assets/images/kurumsal/kalite-sertifikasi-2.jpg" alt="Phonak Premium Partner Sertifikası">
+                        </a>
+                        <figcaption>Phonak Premium Partner</figcaption>
+                    </figure>
+                    
+                    <figure class="certificate-item">
+                        <a href="../assets/images/kurumsal/kalite-sertifikasi-1.jpg" class="certificate-link" data-title="Oticon Yetkili Bayisi">
+                            <img src="../assets/images/kurumsal/kalite-sertifikasi-1.jpg" alt="Oticon Yetkili Bayi Sertifikası">
+                        </a>
+                        <figcaption>Oticon Yetkili Bayisi</figcaption>
+                    </figure>
+                </div>
+            </div>
+            
+            <!-- Lightbox -->
+            <div id="certificate-lightbox" class="lightbox">
+                <span class="lightbox-close">&times;</span>
+                <div class="lightbox-content">
+                    <img id="lightbox-image">
+                    <div id="lightbox-caption"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Çağrı Bölümü -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>İŞİTME TESTİ İÇİN HEMEN BAŞVURUN</h2>
+                <p>Uzman ekibimiz tarafından yapılacak detaylı işitme testi ile işitme sağlığınızı kontrol edin.</p>
+                <a href="tel:05399273505" class="btn">Randevu Alın</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Bölümü -->
+    <footer>
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-contact">
+                    <h3>Bir sorunuz mu var? Bizi 7/24 arayın</h3>
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span><a href="tel:+905399273505">05399273505</a></span>
+                    </div>
+                </div>
+                <div class="footer-info">
+                    <h4>İletişim Bilgileri</h4>
+                    <p>VARLIK MAHALLESİ 201 SOKAK AKIN APT, NO:7/B, 07050 Muratpaşa/Antalya</p>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d797.7510606250476!2d30.68011386965394!3d36.890246770861935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14c391274932c685%3A0x242a58a2d384a602!2zUE9SVEFLQUwgxLDFnsSwVE1FIEPEsEhBWkxBUkk!5e0!3m2!1str!2str!4v1746216384232!5m2!1str!2str" width="80%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="footer-menu">
+                    <h4>Hızlı Menü</h4>
+                    <div class="footer-links">
+                        <div class="links-col">
+                            <ul>
+                                <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                                <li><a href="../urunler/phonak.html">Ürünlerimiz</a></li>
+                                <li><a href="../hizmetler/isitme-cihazi-uygulamasi.html">Hizmetlerimiz</a></li>
+                                <li><a href="../hizmetler/isitme-testi.html">İşitme Testi</a></li>
+                            </ul>
+                        </div>
+                        <div class="links-col">
+                            <ul>
+                                <li><a href="../iletisim.html">İletişim</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-work-hours">
+                    <h5>Çalışma Saatleri</h5>
+                    <p>Pazartesi - Cumartesi 09:00 - 18:00</p>
+                    <p>Pazar: Kapalı</p>
+                </div>
+                <div class="footer-copyright">
+                    <p>Copyright © 2023. Her Hakkı Saklıdır. Kopyalanması, çoğaltılması ve dağıtılması halinde yasal haklarımız işletilecektir.</p>
+                </div>
+                <div class="footer-sitemap">
+                    <a href="../sitemap.html">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    
+    <script>
+        // Lightbox fonksiyonları
+        document.addEventListener('DOMContentLoaded', function() {
+            const lightbox = document.getElementById('certificate-lightbox');
+            const lightboxImg = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const lightboxClose = document.querySelector('.lightbox-close');
+            const certificateLinks = document.querySelectorAll('.certificate-link');
+            
+            // Sertifika görsellerine tıklandığında
+            certificateLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Görsel kaynağını ve başlığını al
+                    const imgSrc = this.getAttribute('href');
+                    const imgTitle = this.getAttribute('data-title');
+                    
+                    // Lightbox'ı göster
+                    lightbox.style.display = 'block';
+                    lightboxImg.src = imgSrc;
+                    lightboxCaption.textContent = imgTitle;
+                    
+                    // Scroll'u devre dışı bırak
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Çarpı işaretine tıklandığında lightbox'ı kapat
+            lightboxClose.addEventListener('click', function() {
+                lightbox.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Lightbox dışındaki bir yere tıklandığında kapat
+            lightbox.addEventListener('click', function(e) {
+                if (e.target === lightbox) {
+                    lightbox.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // ESC tuşuna basıldığında kapat
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && lightbox.style.display === 'block') {
+                    lightbox.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
