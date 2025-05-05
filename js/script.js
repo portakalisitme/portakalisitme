@@ -410,9 +410,85 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Sayfa yüklendiğinde normal ve mobil slider'ı başlat
-    initSlider();
-    initMobileSlider();
+    // Ürün Kartları Kaydırma İşlevselliği
+    function setupProductCardsScroll() {
+        const productCards = document.querySelector('.product-cards');
+        if (!productCards) return;
+        
+        // Mobil cihazda ürün kartlarının soldan başlamasını sağlayalım
+        if(window.innerWidth <= 991) {
+            // Başlangıçta sıfır pozisyondan başlat
+            productCards.scrollLeft = 0;
+            
+            // Dokunma hareketleri için destek ekleyelim
+            let startX, scrollLeft;
+            let isDown = false;
+            
+            productCards.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - productCards.offsetLeft;
+                scrollLeft = productCards.scrollLeft;
+                productCards.style.cursor = 'grabbing';
+            });
+            
+            productCards.addEventListener('mouseleave', () => {
+                isDown = false;
+                productCards.style.cursor = 'grab';
+            });
+            
+            productCards.addEventListener('mouseup', () => {
+                isDown = false;
+                productCards.style.cursor = 'grab';
+            });
+            
+            productCards.addEventListener('mousemove', (e) => {
+                if(!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - productCards.offsetLeft;
+                const walk = (x - startX) * 2; // Kaydırma hızı
+                productCards.scrollLeft = scrollLeft - walk;
+            });
+            
+            // Dokunmatik ekran için
+            productCards.addEventListener('touchstart', (e) => {
+                isDown = true;
+                startX = e.touches[0].pageX - productCards.offsetLeft;
+                scrollLeft = productCards.scrollLeft;
+            }, { passive: true });
+            
+            productCards.addEventListener('touchend', () => {
+                isDown = false;
+            });
+            
+            productCards.addEventListener('touchcancel', () => {
+                isDown = false;
+            });
+            
+            productCards.addEventListener('touchmove', (e) => {
+                if(!isDown) return;
+                const x = e.touches[0].pageX - productCards.offsetLeft;
+                const walk = (x - startX) * 2;
+                productCards.scrollLeft = scrollLeft - walk;
+            }, { passive: true });
+        }
+    }
+    
+    // Sayfa yüklendiğinde başlat
+    if (document.querySelector('.slider')) {
+        initSlider();
+    }
+    
+    if (document.querySelector('.mobile-slider')) {
+        initMobileSlider();
+    }
+    
+    // Ürün kartları kaydırma işlevini başlat
+    setupProductCardsScroll();
+    
+    // Pencerenin yeniden boyutlandırılması durumunda ürün kartlarını yeniden düzenle
+    window.addEventListener('resize', function() {
+        setupProductCardsScroll();
+    });
     
     // Sayfa yüklendiğinde slider görünümünü ayarla
     adjustSliderHeight();

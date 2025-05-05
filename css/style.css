@@ -3562,6 +3562,11 @@ footer {
         scroll-snap-type: x mandatory;
         scrollbar-width: none; /* Firefox için scrollbar gizle */
         -ms-overflow-style: none; /* IE ve Edge için scrollbar gizle */
+        scroll-behavior: smooth;
+        margin: 0 -15px;
+        padding: 15px;
+        width: calc(100% + 30px);
+        scroll-padding: 15px;
     }
     
     .product-cards::-webkit-scrollbar {
@@ -3572,6 +3577,8 @@ footer {
         flex: 0 0 280px;
         scroll-snap-align: start;
         margin-bottom: 0;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     
     .product-image {
@@ -3586,6 +3593,7 @@ footer {
     .product-image img {
         max-height: 160px;
         object-fit: contain;
+        width: 100%;
     }
     
     .product-card h3 {
@@ -4043,5 +4051,117 @@ footer {
     
     .mobile-slider-dots {
         bottom: 165px;
+    }
+}
+
+/* Ürün Kartları Mobil Görünüm İyileştirmeleri */
+@media (max-width: 991px) {
+    .products-section {
+        position: relative;
+        padding: 40px 0px;
+        overflow: hidden;
+    }
+    
+    .products-section .container {
+        position: relative;
+        overflow: visible;
+    }
+    
+    .product-cards {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 15px 0;
+        gap: 20px;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none; /* Firefox için scrollbar gizle */
+        -ms-overflow-style: none; /* IE ve Edge için scrollbar gizle */
+        scroll-behavior: smooth;
+        margin: 0;
+        padding: 15px 15px 15px 15px;
+        width: 100%;
+        position: relative;
+        cursor: grab;
+    }
+    
+    .product-cards::-webkit-scrollbar {
+        display: none; /* Chrome, Safari ve Opera için scrollbar gizle */
+    }
+    
+    .product-card {
+        flex: 0 0 280px;
+        min-width: 280px;
+        scroll-snap-align: start;
+        margin-bottom: 0;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #fff;
+    }
+    
+    .product-card:first-child {
+        margin-left: 0;
+    }
+    
+    .product-image {
+        height: 180px;
+        background: white;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    
+    .product-image img {
+        max-height: 160px;
+        max-width: 100%;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+    
+    .product-content {
+        padding: 15px;
+    }
+    
+    .product-card h3 {
+        font-size: 18px;
+        margin-bottom: 5px;
+        color: #ff7f00;
+    }
+    
+    .product-card p {
+        font-size: 13px;
+        line-height: 1.4;
+        margin-bottom: 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 55px;
+    }
+    
+    .product-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 12px;
+    }
+    
+    .product-features span {
+        font-size: 11px;
+        padding: 4px 8px;
+        background-color: #f7f7f7;
+        border-radius: 20px;
+        color: #555;
+    }
+    
+    .product-card .btn {
+        padding: 8px 20px;
+        font-size: 13px;
+        display: inline-block;
+        width: auto;
     }
 }
