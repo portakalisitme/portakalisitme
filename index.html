@@ -167,27 +167,31 @@
             top: 50%;
             transform: translateY(-50%);
             max-width: 500px;
-            background-color: transparent;
-            border-radius: 0;
-            padding: 30px 0;
+            background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+            border-radius: 8px;
+            padding: 30px;
             color: white;
             z-index: 5;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
             text-align: left;
+            margin-top: 30px;
+            backdrop-filter: blur(3px);
         }
         
         .slide-title {
             font-size: 42px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            font-weight: 700;
         }
         
         .slide-description {
             font-size: 18px;
             margin-bottom: 20px;
             color: #f0f0f0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+            line-height: 1.5;
         }
         
         .slide-features {
@@ -201,6 +205,7 @@
             position: relative;
             padding-left: 25px;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+            font-size: 16px;
         }
         
         .slide-features li:before {
@@ -384,6 +389,65 @@
         @media (max-width: 576px) {
             .mobile-slide-content {
                 padding: 15px;
+            }
+        }
+        
+        /* Responsive ayarlamalar */
+        @media (max-width: 1200px) {
+            .slide-content {
+                max-width: 450px;
+                padding: 25px;
+            }
+            
+            .slide-title {
+                font-size: 36px;
+            }
+            
+            .slide-description {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .slide-content {
+                max-width: 400px;
+                padding: 20px;
+                right: 4%;
+            }
+            
+            .slide-title {
+                font-size: 30px;
+                margin-bottom: 10px;
+            }
+            
+            .slide-description {
+                font-size: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .slide-features li {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .slide-content {
+                max-width: 90%;
+                right: 5%;
+                padding: 15px;
+            }
+            
+            .slide-title {
+                font-size: 26px;
+            }
+            
+            .slide-description {
+                font-size: 14px;
+            }
+            
+            .slide-features li {
+                padding-left: 20px;
+                font-size: 13px;
             }
         }
     </style>
