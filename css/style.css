@@ -232,35 +232,38 @@ nav ul li a:hover {
     margin-left: auto;
 }
 
-/* Slider Stil */
+/* Ana Slider Stilleri */
 .slider-container {
     position: relative;
+    width: 100%;
+    height: 100vh;
     overflow: hidden;
-    height: 650px;
-    width: calc(100% - 40px);
-    margin: 20px auto 20px;
-    background: transparent;
+    margin: 0;
     padding: 0;
-    border-radius: 10px;
 }
 
 .slider {
     display: flex;
     transition: transform 0.5s ease-in-out;
-    height: 100%;
+    height: 100vh;
     width: 100%;
-    border-radius: 10px;
-    overflow: hidden;
 }
 
 .slide {
     min-width: 100%;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: relative;
     display: none;
-    border-radius: 10px;
+}
+
+.header-slider-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 .slide.active {
@@ -272,8 +275,6 @@ nav ul li a:hover {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    display: block;
-    border-radius: 10px;
 }
 
 .slider-container.images-loaded .slide-image {
@@ -283,16 +284,18 @@ nav ul li a:hover {
 .slide-content {
     position: absolute;
     top: 50%;
-    right: 3%;
+    right: 5%;
     left: auto;
     transform: translateY(-50%);
     max-width: 500px;
     color: white;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     z-index: 10;
     display: block;
     text-align: left;
     padding-right: 20px;
+    background-color: transparent;
+    border-radius: 0;
 }
 
 .slide-title {
@@ -302,20 +305,12 @@ nav ul li a:hover {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-.slide-title::after {
-    content: '';
-    display: block;
-    width: 150px;
-    height: 3px;
-    background-color: #ff7f00;
-    margin: 15px 0;
-}
-
 .slide-description {
     font-size: 20px;
     margin-bottom: 25px;
     line-height: 1.4;
     max-width: 100%;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 .slide-features {
@@ -329,6 +324,7 @@ nav ul li a:hover {
     font-size: 18px;
     display: flex;
     align-items: center;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 .slide-features li::before {
@@ -411,7 +407,7 @@ nav ul li a:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.7) 100%);
+    background: transparent; /* gölgelendirmeyi kaldır */
     z-index: 1;
 }
 
@@ -421,8 +417,9 @@ nav ul li a:hover {
 
 /* Hakkımızda Bölümü */
 .about-section {
-    padding: 80px 0;
+    padding: 60px 0;
     background-color: #f9f9f9;
+    margin-top: 0;
 }
 
 .about-content {
@@ -516,6 +513,8 @@ nav ul li a:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s, box-shadow 0.3s;
     margin-bottom: 25px;
+    position: relative;
+    padding-bottom: 60px; /* Buton için alan açılıyor */
 }
 
 .product-card:hover {
@@ -545,6 +544,7 @@ nav ul li a:hover {
     flex-direction: column;
     padding: 20px;
     flex-grow: 1;
+    position: relative;
 }
 
 .product-card h3 {
@@ -1116,14 +1116,24 @@ footer {
 
 /* Responsive Tasarım - Slider için */
 @media (min-width: 1400px) {
-    .slider-container {
-        height: 700px;
+    .slider-container, .slider, .slide, .header-slider-wrapper {
+        height: 100vh;
+    }
+    
+    .slide img.slide-image {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+    
+    .about-section {
+        padding-top: 50px; /* Üst boşluğu azaltalım */
     }
 }
 
 @media (max-width: 1399px) {
-    .slider-container {
-        height: 600px;
+    .slider-container, .slider, .slide, .header-slider-wrapper {
+        height: 100vh;
     }
     
     .slide-title {
@@ -1132,8 +1142,8 @@ footer {
 }
 
 @media (max-width: 992px) {
-    .slider-container {
-        height: 500px;
+    .slider-container, .slider, .slide, .header-slider-wrapper {
+        height: 100vh;
     }
     
     .slide-title {
@@ -1342,7 +1352,8 @@ footer {
 /* Hakkımızda Bölümü Mobil Optimizasyonu */
 @media (max-width: 768px) {
     .about-section {
-        padding: 50px 0;
+        padding: 40px 0;
+        margin-top: 0;
     }
     
     .about-content {
@@ -3901,7 +3912,7 @@ footer {
 /* Responsive Styles for Different Screen Sizes */
 @media (min-width: 1900px) {
     .slider-container {
-        height: 1400px;
+        height: 100vh;
     }
     
     .slide img.slide-image {
@@ -3911,6 +3922,7 @@ footer {
     
     .slide-content {
         right: 5%;
+        left: auto;
         max-width: 600px;
     }
     
@@ -3929,7 +3941,7 @@ footer {
 
 @media (min-width: 1400px) and (max-width: 1899px) {
     .slider-container {
-        height: 800px;
+        height: 100vh;
     }
     
     .slide img.slide-image {
@@ -3939,6 +3951,7 @@ footer {
     
     .slide-content {
         right: 5%;
+        left: auto;
         max-width: 550px;
     }
     
@@ -3953,7 +3966,7 @@ footer {
 
 @media (min-width: 992px) and (max-width: 1399px) {
     .slider-container {
-        height: 650px;
+        height: 100vh;
     }
     
     .slide img.slide-image {
@@ -3963,6 +3976,7 @@ footer {
     
     .slide-content {
         right: 4%;
+        left: auto;
         max-width: 480px;
     }
     
@@ -3981,11 +3995,12 @@ footer {
 
 @media (max-width: 991px) {
     .slider-container {
-        height: 500px;
+        height: 100vh;
     }
     
     .slide-content {
         right: 3%;
+        left: auto;
         max-width: 430px;
     }
     
@@ -4180,5 +4195,96 @@ footer {
         content: '';
         width: 15px; /* Sol ve sağ kenarlarda boşluk */
         flex: 0 0 auto;
+    }
+}
+
+/* Mobil slider konteyner */
+.mobile-slider-container {
+    display: none;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+}
+
+@media (max-width: 768px) {
+    .slider-container {
+        display: none;
+    }
+    
+    .mobile-slider-container {
+        display: block;
+        margin-top: 0;
+    }
+}
+
+@media (min-width: 1900px) {
+    .slider-container, .slider, .slide, .header-slider-wrapper {
+        height: 100vh;
+    }
+    
+    .about-section {
+        padding-top: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        padding: 40px 0;
+        margin-top: 0;
+    }
+}
+
+/* Detay butonu için yeni stil - sağ alt köşede konumlandırma */
+.detail-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 8px 15px;
+    background-color: #ff7f00;
+    color: white;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.detail-button:hover {
+    background-color: #e67300;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Mobil görünüm için detay butonu düzenlemeleri */
+@media (max-width: 768px) {
+    .detail-button {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    
+    .product-card {
+        padding-bottom: 50px;
+    }
+}
+
+@media (max-width: 576px) {
+    .detail-button {
+        bottom: 10px;
+        right: 10px;
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+    
+    .product-card {
+        padding-bottom: 45px;
     }
 }

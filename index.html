@@ -20,7 +20,8 @@
             padding: 0;
         }
         
-        .main-header {
+        /* Desktop header stilleri */
+        .main-header-desktop {
             position: absolute;
             top: 0;
             left: 0;
@@ -31,26 +32,26 @@
             border-bottom: none;
         }
         
-        .main-header .container {
+        .main-header-desktop .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
         }
         
-        .main-header nav ul {
+        .main-header-desktop nav ul {
             display: flex;
             list-style: none;
             margin: 0;
             padding: 0;
         }
         
-        .main-header nav ul li {
+        .main-header-desktop nav ul li {
             margin: 0 15px;
             position: relative;
         }
         
-        .main-header nav ul li a {
+        .main-header-desktop nav ul li a {
             color: #fff;
             font-weight: 600;
             text-decoration: none;
@@ -58,6 +59,11 @@
             display: block;
             font-size: 14px;
             text-transform: uppercase;
+        }
+        
+        /* Mobil header stilleri */
+        .main-header-mobile {
+            display: none;
         }
         
         /* Yeni dropdown stillemesi */
@@ -116,12 +122,11 @@
             margin-top: 0;
         }
         
+        /* Slider düzenlemeleri - border-radius kaldırıldı */
         .slider-container {
-            position: absolute;
-            top: 0;
-            left: 0;
+            position: relative;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             overflow: hidden;
             margin: 0;
             padding: 0;
@@ -134,54 +139,53 @@
             padding: 0;
         }
         
-        .slide {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .slide-image {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .slide img.slide-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: center;
+            border-radius: 0;
         }
         
+        /* Slider overlay - gölgelendirme kaldırıldı */
         .slider-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3);
+            background: transparent;
             z-index: 1;
         }
         
+        /* Slider içerik - fotoğraf üzerinde kalması için */
         .slide-content {
             position: absolute;
-            right: 10%;
+            right: 5%;
+            left: auto;
             top: 50%;
             transform: translateY(-50%);
             max-width: 500px;
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 30px;
-            border-radius: 10px;
+            background-color: transparent;
+            border-radius: 0;
+            padding: 30px 0;
             color: white;
-            z-index: 2;
+            z-index: 5;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+            text-align: left;
         }
         
         .slide-title {
             font-size: 42px;
             margin-bottom: 10px;
             color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
         }
         
         .slide-description {
             font-size: 18px;
             margin-bottom: 20px;
             color: #f0f0f0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
         }
         
         .slide-features {
@@ -194,6 +198,7 @@
             padding: 5px 0;
             position: relative;
             padding-left: 25px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
         }
         
         .slide-features li:before {
@@ -247,53 +252,21 @@
         @media (max-width: 768px) {
             .header-slider-wrapper {
                 height: auto;
+                display: none;
             }
             
-            .main-header {
-                position: relative;
-                background-color: #ffffff;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            .main-header-desktop {
+                display: none;
             }
             
-            .main-header nav ul li a {
-                color: #333;
-            }
-            
-            .menu-button {
-                color: #333;
+            .main-header-mobile {
+                display: block;
             }
             
             .slider-container {
                 position: relative;
                 height: auto;
-            }
-            
-            .slider, .slide {
-                height: auto;
-                min-height: 50vh;
-            }
-            
-            .slide-image {
-                position: relative;
-                height: 50vh;
-            }
-            
-            .slide-content {
-                position: relative;
-                right: auto;
-                top: auto;
-                transform: none;
-                max-width: 100%;
-                margin: 20px;
-                border-radius: 0;
-            }
-            
-            .main-header nav {
                 display: none;
-            }
-            
-            .menu-button {
-                display: block;
             }
             
             .social-sidebar {
@@ -352,6 +325,65 @@
         .slider-prev:hover, .slider-next:hover {
             background-color: rgba(255, 127, 0, 0.8);
         }
+        
+        /* Hakkımızda bölümü ile slider arasındaki boşluğu azalt */
+        .about-section {
+            padding-top: 60px;
+            margin-top: 0;
+        }
+        
+        /* 1440px genişlik için ek düzenlemeler */
+        @media (min-width: 1440px) {
+            .slide img.slide-image {
+                object-position: center;
+            }
+        }
+        
+        /* Mobil görünüm için ek stil düzenlemeleri */
+        .mobile-slide-content {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 0 0 10px 10px;
+            border: 1px solid #eee;
+            border-top: none;
+            position: relative;
+            z-index: 30;
+            text-align: left;
+        }
+        
+        .mobile-slide-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .mobile-slide-description {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .mobile-slide-features {
+            list-style: none;
+            margin: 0 0 20px 0;
+            padding: 0;
+            text-align: left;
+        }
+        
+        .mobile-slide-features li {
+            margin-bottom: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+        
+        @media (max-width: 576px) {
+            .mobile-slide-content {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -360,10 +392,82 @@
         <div class="loader"></div>
     </div>
 
-    <!-- Header-Slider Entegre Bölüm -->
-    <div class="header-slider-wrapper">
-    <!-- Header Bölümü -->
+    <!-- Mobil Header (Standart yapı, tablet ve mobil görünümde gösterilecek) -->
+    <header class="main-header-mobile">
+        <div class="header-top">
+            <div class="container">
+                <div class="contact-info">
+                    <div class="phone">
+                        <i class="fas fa-phone"></i>
+                        <span>05399273505</span>
+                    </div>
+                    <div class="social-icons">
+                        <a href="https://wa.me/+905399273505" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="assets/images/logo.png" alt="Portakal İşitme Cihazları">
+                    </a>
+                </div>
+                <nav>
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#">KURUMSAL</a>
+                            <div class="dropdown-content">
+                                <a href="kurumsal/hakkimizda.html">Hakkımızda</a>
+                                <a href="kurumsal/tarihce.html">Tarihçe</a>
+                                <a href="kurumsal/misyon-vizyon.html">Misyon & Vizyon</a>
+                                <a href="kurumsal/kalite-politikamiz.html">Kalite Politikamız</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">MARKALARIMIZ</a>
+                            <div class="dropdown-content">
+                                <a href="urunler/phonak.html">Phonak</a>
+                                <a href="urunler/oticon.html">Oticon</a>
+                                <a href="urunler/philips.html">Philips</a>
+                                <a href="urunler/rexton.html">Rexton</a>
+                                <a href="urunler/unitron.html">Unitron</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">ÇOCUKLAR İÇİN</a>
+                            <div class="dropdown-content">
+                                <a href="cocuklar/oticon-play-px.html">Oticon Play PX</a>
+                                <a href="cocuklar/phonak-sky-l.html">Phonak Sky L</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">HİZMETLER</a>
+                            <div class="dropdown-content">
+                                <a href="hizmetler/isitme-cihazi-uygulamasi.html">İşitme Cihazı Uygulaması</a>
+                                <a href="hizmetler/isitme-cihazi-tamiri.html">İşitme Cihazı Tamiri</a>
+                                <a href="hizmetler/kulak-kalibi.html">Kulak Kalıbı</a>
+                                <a href="hizmetler/aksesuar-yedek-parca.html">Aksesuar & Yedek Parça</a>
+                                <a href="hizmetler/isitme-testi.html">İşitme Testi</a>
+                            </div>
+                        </li>
+                        <li><a href="iletisim.html">İLETİŞİM</a></li>
+                    </ul>
+                </nav>
+                <div class="menu-button">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Header-Slider Entegre Bölüm (Desktop için) -->
+    <div class="header-slider-wrapper">
+    <!-- Desktop Header Bölümü -->
+        <div class="main-header-desktop">
             <div class="container">
                 <div class="logo">
                     <a href="index.html">
@@ -430,7 +534,7 @@
         <div class="slider">
             <div class="slide active">
                 <div class="slider-overlay"></div>
-                    <img src="assets/images/slider/oticon-slider.jpg" alt="Oticon İşitme Cihazları" class="slide-image">
+                <img src="assets/images/slider/oticon-slider.jpg" alt="Oticon İşitme Cihazları" class="slide-image">
                 <div class="slide-content">
                     <h1 class="slide-title">Oticon İşitme Cihazları</h1>
                     <p class="slide-description">Beyin merkezli işitme teknolojisi ile fark yaratan çözümler.</p>
@@ -445,7 +549,7 @@
             </div>
             <div class="slide">
                 <div class="slider-overlay"></div>
-                    <img src="assets/images/slider/phonak-slider.jpg" alt="Phonak İşitme Cihazları" class="slide-image">
+                <img src="assets/images/slider/phonak-slider.jpg" alt="Phonak İşitme Cihazları" class="slide-image">
                 <div class="slide-content">
                     <h1 class="slide-title">Phonak İşitme Cihazları</h1>
                     <p class="slide-description">İsviçre teknolojisiyle geliştirilen, kaliteli işitme deneyimi.</p>
@@ -453,14 +557,14 @@
                         <li>Bluetooth bağlantı teknolojisi</li>
                         <li>Şarj edilebilir pil seçeneği</li>
                         <li>Yapay zeka destekli ses işleme</li>
-                            <li>SGK Anlaşması mevcuttur.</li>
+                        <li>SGK Anlaşması mevcuttur.</li>
                     </ul>
                     <a href="urunler/phonak.html" class="btn">Detaylı Bilgi</a>
                 </div>
             </div>
             <div class="slide">
                 <div class="slider-overlay"></div>
-                    <img src="assets/images/slider/philips-slider.jpg" alt="Philips İşitme Cihazları" class="slide-image">
+                <img src="assets/images/slider/philips-slider.jpg" alt="Philips İşitme Cihazları" class="slide-image">
                 <div class="slide-content">
                     <h1 class="slide-title">Philips İşitme Cihazları</h1>
                     <p class="slide-description">Yaşam kalitesini artıran, kullanıcı dostu teknoloji.</p>
@@ -468,14 +572,14 @@
                         <li>Otomatik ortam algılama</li>
                         <li>Gürültü filtreleme teknolojisi</li>
                         <li>Mobil uygulama kontrolü</li>
-                            <li>SGK Anlaşması mevcuttur.</li>
+                        <li>SGK Anlaşması mevcuttur.</li>
                     </ul>
                     <a href="urunler/philips.html" class="btn">Detaylı Bilgi</a>
                 </div>
             </div>
             <div class="slide">
                 <div class="slider-overlay"></div>
-                    <img src="assets/images/slider/rexton-slider.jpg" alt="Rexton İşitme Cihazları" class="slide-image">
+                <img src="assets/images/slider/rexton-slider.jpg" alt="Rexton İşitme Cihazları" class="slide-image">
                 <div class="slide-content">
                     <h1 class="slide-title">Rexton İşitme Cihazları</h1>
                     <p class="slide-description">Alman mühendisliğinin kusursuzluğu ile üretilen cihazlar.</p>
@@ -483,14 +587,14 @@
                         <li>Yüksek dayanıklılık</li>
                         <li>Su ve toza karşı koruma</li>
                         <li>Kristal netliğinde ses kalitesi</li>
-                            <li>SGK Anlaşması mevcuttur.</li>
+                        <li>SGK Anlaşması mevcuttur.</li>
                     </ul>
                     <a href="urunler/rexton.html" class="btn">Detaylı Bilgi</a>
                 </div>
             </div>
             <div class="slide">
                 <div class="slider-overlay"></div>
-                    <img src="assets/images/slider/unitron-slider.jpg" alt="Unitron İşitme Cihazları" class="slide-image">
+                <img src="assets/images/slider/unitron-slider.jpg" alt="Unitron İşitme Cihazları" class="slide-image">
                 <div class="slide-content">
                     <h1 class="slide-title">Unitron İşitme Cihazları</h1>
                     <p class="slide-description">Kanada'nın sofistike teknolojisi ile konforlu işitme.</p>
@@ -498,17 +602,17 @@
                         <li>SoundNav 3.0 teknolojisi</li>
                         <li>Akıllı uyum sistemi</li>
                         <li>Çift mikrofonlu tasarım</li>
-                            <li>SGK Anlaşması mevcuttur.</li>
+                        <li>SGK Anlaşması mevcuttur.</li>
                     </ul>
                     <a href="urunler/unitron.html" class="btn">Detaylı Bilgi</a>
-                    </div>
                 </div>
             </div>
-            
-            <!-- Slider Kontrolleri -->
-            <div class="slider-prev"><i class="fas fa-chevron-left"></i></div>
-            <div class="slider-next"><i class="fas fa-chevron-right"></i></div>
-            
+        </div>
+        
+        <!-- Slider Kontrolleri -->
+        <div class="slider-prev"><i class="fas fa-chevron-left"></i></div>
+        <div class="slider-next"><i class="fas fa-chevron-right"></i></div>
+        
         <div class="slider-dots">
             <span class="dot active" data-index="0"></span>
             <span class="dot" data-index="1"></span>
@@ -650,7 +754,7 @@
                         <span>Şarj Edilebilir</span>
                         <span>Yapay Zeka</span>
                     </div>
-                    <a href="urunler/phonak.html" class="btn">Detaylar</a>
+                    <a href="urunler/phonak.html" class="detail-button">Tüm Detaylar</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -665,7 +769,7 @@
                         <span>360° Ses Algılama</span>
                         <span>Konuşma Odaklı</span>
                     </div>
-                    <a href="urunler/oticon.html" class="btn">Detaylar</a>
+                    <a href="urunler/oticon.html" class="detail-button">Tüm Detaylar</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -680,7 +784,7 @@
                         <span>Gürültü Filtreleme</span>
                         <span>Mobil Uygulama</span>
                     </div>
-                    <a href="urunler/philips.html" class="btn">Detaylar</a>
+                    <a href="urunler/philips.html" class="detail-button">Tüm Detaylar</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -695,7 +799,7 @@
                         <span>Su ve Toz Koruması</span>
                         <span>Kristal Ses Kalitesi</span>
                     </div>
-                    <a href="urunler/rexton.html" class="btn">Detaylar</a>
+                    <a href="urunler/rexton.html" class="detail-button">Tüm Detaylar</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -710,7 +814,7 @@
                         <span>Akıllı Uyum Sistemi</span>
                         <span>Çift Mikrofonlu</span>
                     </div>
-                    <a href="urunler/unitron.html" class="btn">Detaylar</a>
+                    <a href="urunler/unitron.html" class="detail-button">Tüm Detaylar</a>
                     </div>
                 </div>
             </div>
