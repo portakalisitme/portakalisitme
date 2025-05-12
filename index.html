@@ -9,6 +9,350 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Header-Slider entegrasyonu için ek stiller */
+        .header-slider-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            background-color: transparent;
+            padding: 10px 0;
+            border-bottom: none;
+        }
+        
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        
+        .main-header nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main-header nav ul li {
+            margin: 0 15px;
+            position: relative;
+        }
+        
+        .main-header nav ul li a {
+            color: #fff;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 10px 0;
+            display: block;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        
+        /* Yeni dropdown stillemesi */
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 200px;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 101;
+            border-radius: 0;
+            padding: 0;
+            margin-top: 0;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            padding: 15px 20px;
+            display: block;
+            color: #333 !important;
+            text-decoration: none;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+            font-weight: normal;
+            text-transform: none;
+            transition: all 0.2s ease;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f8f8f8;
+            color: #ff7f00 !important;
+            padding-left: 25px;
+        }
+        
+        .dropdown > a:after {
+            content: "\f107";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            margin-left: 5px;
+            font-size: 12px;
+        }
+        
+        .social-icons a {
+            font-size: 18px;
+            margin-left: 10px;
+        }
+        
+        .logo img {
+            height: 60px;
+            width: auto;
+            margin-top: 0;
+        }
+        
+        .slider-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .slider, .slide {
+            height: 100vh;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .slide {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+        
+        .slider-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        
+        .slide-content {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-50%);
+            max-width: 500px;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 30px;
+            border-radius: 10px;
+            color: white;
+            z-index: 2;
+        }
+        
+        .slide-title {
+            font-size: 42px;
+            margin-bottom: 10px;
+            color: white;
+        }
+        
+        .slide-description {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #f0f0f0;
+        }
+        
+        .slide-features {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+        
+        .slide-features li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .slide-features li:before {
+            content: "●";
+            color: #ff7f00;
+            position: absolute;
+            left: 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #ff7f00;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #e67300;
+            transform: translateY(-2px);
+        }
+        
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            z-index: 5;
+        }
+        
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .dot.active {
+            background-color: #ff7f00;
+            transform: scale(1.2);
+        }
+        
+        /* Mobil için düzenlemeler */
+        @media (max-width: 768px) {
+            .header-slider-wrapper {
+                height: auto;
+            }
+            
+            .main-header {
+                position: relative;
+                background-color: #ffffff;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+            
+            .main-header nav ul li a {
+                color: #333;
+            }
+            
+            .menu-button {
+                color: #333;
+            }
+            
+            .slider-container {
+                position: relative;
+                height: auto;
+            }
+            
+            .slider, .slide {
+                height: auto;
+                min-height: 50vh;
+            }
+            
+            .slide-image {
+                position: relative;
+                height: 50vh;
+            }
+            
+            .slide-content {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+                max-width: 100%;
+                margin: 20px;
+                border-radius: 0;
+            }
+            
+            .main-header nav {
+                display: none;
+            }
+            
+            .menu-button {
+                display: block;
+            }
+            
+            .social-sidebar {
+                display: none;
+            }
+        }
+        
+        /* Sosyal medya sidebar */
+        .social-sidebar {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #ff7f00;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            padding: 15px 5px;
+            z-index: 999;
+        }
+        
+        .social-sidebar a {
+            display: block;
+            color: white;
+            font-size: 20px;
+            margin: 15px 10px;
+            text-decoration: none;
+        }
+        
+        /* Yeni slider kontrolleri */
+        .slider-prev, .slider-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+        
+        .slider-prev {
+            left: 20px;
+        }
+        
+        .slider-next {
+            right: 20px;
+        }
+        
+        .slider-prev:hover, .slider-next:hover {
+            background-color: rgba(255, 127, 0, 0.8);
+        }
+    </style>
 </head>
 <body>
     <!-- Yükleme Ekranı -->
@@ -16,24 +360,9 @@
         <div class="loader"></div>
     </div>
 
+    <!-- Header-Slider Entegre Bölüm -->
+    <div class="header-slider-wrapper">
     <!-- Header Bölümü -->
-    <header>
-        <div class="header-top">
-            <div class="container"> 
-                <div class="contact-info">
-                    <div class="phone">
-                        <i class="fas fa-phone"></i>
-                        <span><a href="tel:+905399273505">05399273505</a></span>
-                        
-                    </div>
-                    <div class="social-icons">
-                        <a href="https://wa.me/+905399273505" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="main-header">
             <div class="container">
                 <div class="logo">
@@ -87,14 +416,21 @@
                 </div>
             </div>
         </div>
-    </header>
+
+        <!-- Sosyal Medya Sidebar -->
+        <div class="social-sidebar">
+            <a href="https://wa.me/+905399273505" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
 
     <!-- Slider Bölümü -->
     <section class="slider-container">
         <div class="slider">
             <div class="slide active">
                 <div class="slider-overlay"></div>
-                <img src="assets/images/slider/oticon-slider.jpg" alt="Oticon İşitme Cihazları" class="slide-image lightbox-image">
+                    <img src="assets/images/slider/oticon-slider.jpg" alt="Oticon İşitme Cihazları" class="slide-image">
                 <div class="slide-content">
                     <h1 class="slide-title">Oticon İşitme Cihazları</h1>
                     <p class="slide-description">Beyin merkezli işitme teknolojisi ile fark yaratan çözümler.</p>
@@ -106,11 +442,10 @@
                     </ul>
                     <a href="urunler/oticon.html" class="btn">Detaylı Bilgi</a>
                 </div>
-                <img src="assets/images/logo.png" alt="Portakal İşitme Cihazları Logo" class="slider-logo">
             </div>
             <div class="slide">
                 <div class="slider-overlay"></div>
-                <img src="assets/images/slider/phonak-slider.jpg" alt="Phonak İşitme Cihazları" class="slide-image lightbox-image">
+                    <img src="assets/images/slider/phonak-slider.jpg" alt="Phonak İşitme Cihazları" class="slide-image">
                 <div class="slide-content">
                     <h1 class="slide-title">Phonak İşitme Cihazları</h1>
                     <p class="slide-description">İsviçre teknolojisiyle geliştirilen, kaliteli işitme deneyimi.</p>
@@ -118,15 +453,14 @@
                         <li>Bluetooth bağlantı teknolojisi</li>
                         <li>Şarj edilebilir pil seçeneği</li>
                         <li>Yapay zeka destekli ses işleme</li>
-                        <li>SGK Anlaşması mevcuttur.</li>
+                            <li>SGK Anlaşması mevcuttur.</li>
                     </ul>
                     <a href="urunler/phonak.html" class="btn">Detaylı Bilgi</a>
                 </div>
-                <img src="assets/images/logo.png" alt="Portakal İşitme Cihazları Logo" class="slider-logo">
             </div>
             <div class="slide">
                 <div class="slider-overlay"></div>
-                <img src="assets/images/slider/philips-slider.jpg" alt="Philips İşitme Cihazları" class="slide-image lightbox-image">
+                    <img src="assets/images/slider/philips-slider.jpg" alt="Philips İşitme Cihazları" class="slide-image">
                 <div class="slide-content">
                     <h1 class="slide-title">Philips İşitme Cihazları</h1>
                     <p class="slide-description">Yaşam kalitesini artıran, kullanıcı dostu teknoloji.</p>
@@ -134,15 +468,14 @@
                         <li>Otomatik ortam algılama</li>
                         <li>Gürültü filtreleme teknolojisi</li>
                         <li>Mobil uygulama kontrolü</li>
-                        <li>SGK Anlaşması mevcuttur.</li>
+                            <li>SGK Anlaşması mevcuttur.</li>
                     </ul>
                     <a href="urunler/philips.html" class="btn">Detaylı Bilgi</a>
                 </div>
-                <img src="assets/images/logo.png" alt="Portakal İşitme Cihazları Logo" class="slider-logo">
             </div>
             <div class="slide">
                 <div class="slider-overlay"></div>
-                <img src="assets/images/slider/rexton-slider.jpg" alt="Rexton İşitme Cihazları" class="slide-image lightbox-image">
+                    <img src="assets/images/slider/rexton-slider.jpg" alt="Rexton İşitme Cihazları" class="slide-image">
                 <div class="slide-content">
                     <h1 class="slide-title">Rexton İşitme Cihazları</h1>
                     <p class="slide-description">Alman mühendisliğinin kusursuzluğu ile üretilen cihazlar.</p>
@@ -150,15 +483,14 @@
                         <li>Yüksek dayanıklılık</li>
                         <li>Su ve toza karşı koruma</li>
                         <li>Kristal netliğinde ses kalitesi</li>
-                        <li>SGK Anlaşması mevcuttur.</li>
+                            <li>SGK Anlaşması mevcuttur.</li>
                     </ul>
                     <a href="urunler/rexton.html" class="btn">Detaylı Bilgi</a>
                 </div>
-                <img src="assets/images/logo.png" alt="Portakal İşitme Cihazları Logo" class="slider-logo">
             </div>
             <div class="slide">
                 <div class="slider-overlay"></div>
-                <img src="assets/images/slider/unitron-slider.jpg" alt="Unitron İşitme Cihazları" class="slide-image lightbox-image">
+                    <img src="assets/images/slider/unitron-slider.jpg" alt="Unitron İşitme Cihazları" class="slide-image">
                 <div class="slide-content">
                     <h1 class="slide-title">Unitron İşitme Cihazları</h1>
                     <p class="slide-description">Kanada'nın sofistike teknolojisi ile konforlu işitme.</p>
@@ -166,13 +498,17 @@
                         <li>SoundNav 3.0 teknolojisi</li>
                         <li>Akıllı uyum sistemi</li>
                         <li>Çift mikrofonlu tasarım</li>
-                        <li>SGK Anlaşması mevcuttur.</li>
+                            <li>SGK Anlaşması mevcuttur.</li>
                     </ul>
                     <a href="urunler/unitron.html" class="btn">Detaylı Bilgi</a>
+                    </div>
                 </div>
-                <img src="assets/images/logo.png" alt="Portakal İşitme Cihazları Logo" class="slider-logo">
             </div>
-        </div>
+            
+            <!-- Slider Kontrolleri -->
+            <div class="slider-prev"><i class="fas fa-chevron-left"></i></div>
+            <div class="slider-next"><i class="fas fa-chevron-right"></i></div>
+            
         <div class="slider-dots">
             <span class="dot active" data-index="0"></span>
             <span class="dot" data-index="1"></span>
@@ -181,6 +517,7 @@
             <span class="dot" data-index="4"></span>
         </div>
     </section>
+    </div>
     
     <!-- Mobil Dikey Slider Bölümü -->
     <section class="mobile-slider-container">
@@ -306,14 +643,14 @@
                         <img src="assets/images/urunler/phonak/phonak-brand.jpg" alt="Phonak İşitme Cihazları" class="lightbox-image">
                     </div>
                     <div class="product-content">
-                        <h3>Phonak İşitme Cihazları</h3>
+                    <h3>Phonak İşitme Cihazları</h3>
                         <p>İsviçre teknolojisiyle geliştirilen, kaliteli işitme deneyimi sunan cihazlar. Gelişmiş bluetooth teknolojisi ve şarj edilebilir pil seçenekleriyle günlük hayatınızı kolaylaştırır.</p>
-                        <div class="product-features">
-                            <span>Bluetooth Bağlantı</span>
-                            <span>Şarj Edilebilir</span>
-                            <span>Yapay Zeka</span>
-                        </div>
-                        <a href="urunler/phonak.html" class="btn">Detaylar</a>
+                    <div class="product-features">
+                        <span>Bluetooth Bağlantı</span>
+                        <span>Şarj Edilebilir</span>
+                        <span>Yapay Zeka</span>
+                    </div>
+                    <a href="urunler/phonak.html" class="btn">Detaylar</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -321,14 +658,14 @@
                         <img src="assets/images/urunler/oticon/oticon-brand.jpg" alt="Oticon İşitme Cihazları" class="lightbox-image">
                     </div>
                     <div class="product-content">
-                        <h3>Oticon İşitme Cihazları</h3>
-                        <p>Beyin merkezli işitme teknolojisi ile fark yaratan çözümler sunan cihazlar.</p>
-                        <div class="product-features">
-                            <span>BrainHearing™</span>
-                            <span>360° Ses Algılama</span>
-                            <span>Konuşma Odaklı</span>
-                        </div>
-                        <a href="urunler/oticon.html" class="btn">Detaylar</a>
+                    <h3>Oticon İşitme Cihazları</h3>
+                    <p>Beyin merkezli işitme teknolojisi ile fark yaratan çözümler sunan cihazlar.</p>
+                    <div class="product-features">
+                        <span>BrainHearing™</span>
+                        <span>360° Ses Algılama</span>
+                        <span>Konuşma Odaklı</span>
+                    </div>
+                    <a href="urunler/oticon.html" class="btn">Detaylar</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -336,14 +673,14 @@
                         <img src="assets/images/urunler/philips/philips-brand.jpg" alt="Philips İşitme Cihazları" class="lightbox-image">
                     </div>
                     <div class="product-content">
-                        <h3>Philips İşitme Cihazları</h3>
-                        <p>Yaşam kalitesini artıran, kullanıcı dostu teknolojiler sunan cihazlar.</p>
-                        <div class="product-features">
-                            <span>Otomatik Algılama</span>
-                            <span>Gürültü Filtreleme</span>
-                            <span>Mobil Uygulama</span>
-                        </div>
-                        <a href="urunler/philips.html" class="btn">Detaylar</a>
+                    <h3>Philips İşitme Cihazları</h3>
+                    <p>Yaşam kalitesini artıran, kullanıcı dostu teknolojiler sunan cihazlar.</p>
+                    <div class="product-features">
+                        <span>Otomatik Algılama</span>
+                        <span>Gürültü Filtreleme</span>
+                        <span>Mobil Uygulama</span>
+                    </div>
+                    <a href="urunler/philips.html" class="btn">Detaylar</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -351,14 +688,14 @@
                         <img src="assets/images/urunler/rexton/rexton-brand.jpg" alt="Rexton İşitme Cihazları" class="lightbox-image">
                     </div>
                     <div class="product-content">
-                        <h3>Rexton İşitme Cihazları</h3>
-                        <p>Alman mühendisliğinin kusursuzluğu ile üretilen cihazlar.</p>
-                        <div class="product-features">
-                            <span>Yüksek Dayanıklılık</span>
-                            <span>Su ve Toz Koruması</span>
-                            <span>Kristal Ses Kalitesi</span>
-                        </div>
-                        <a href="urunler/rexton.html" class="btn">Detaylar</a>
+                    <h3>Rexton İşitme Cihazları</h3>
+                    <p>Alman mühendisliğinin kusursuzluğu ile üretilen cihazlar.</p>
+                    <div class="product-features">
+                        <span>Yüksek Dayanıklılık</span>
+                        <span>Su ve Toz Koruması</span>
+                        <span>Kristal Ses Kalitesi</span>
+                    </div>
+                    <a href="urunler/rexton.html" class="btn">Detaylar</a>
                     </div>
                 </div>
                 <div class="product-card">
@@ -366,14 +703,14 @@
                         <img src="assets/images/urunler/unitron/unitron-brand.jpg" alt="Unitron İşitme Cihazları" class="lightbox-image">
                     </div>
                     <div class="product-content">
-                        <h3>Unitron İşitme Cihazları</h3>
-                        <p>Kanada'nın sofistike teknolojisi ile konforlu işitme sunan cihazlar.</p>
-                        <div class="product-features">
-                            <span>SoundNav 3.0</span>
-                            <span>Akıllı Uyum Sistemi</span>
-                            <span>Çift Mikrofonlu</span>
-                        </div>
-                        <a href="urunler/unitron.html" class="btn">Detaylar</a>
+                    <h3>Unitron İşitme Cihazları</h3>
+                    <p>Kanada'nın sofistike teknolojisi ile konforlu işitme sunan cihazlar.</p>
+                    <div class="product-features">
+                        <span>SoundNav 3.0</span>
+                        <span>Akıllı Uyum Sistemi</span>
+                        <span>Çift Mikrofonlu</span>
+                    </div>
+                    <a href="urunler/unitron.html" class="btn">Detaylar</a>
                     </div>
                 </div>
             </div>

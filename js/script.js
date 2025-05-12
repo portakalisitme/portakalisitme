@@ -494,11 +494,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Sayfa yüklendiğinde başlat
     if (document.querySelector('.slider')) {
-        initSlider();
+    initSlider();
     }
     
     if (document.querySelector('.mobile-slider')) {
-        initMobileSlider();
+    initMobileSlider();
     }
     
     // Ürün kartları kaydırma işlevini başlat
@@ -874,11 +874,11 @@ function setupProductCards() {
         
         productCards.forEach((card, index) => {
             // Büyüteç özelliği kaldırıldı
-            
+                
             // Kart tıklaması için fonksiyonu ekle
-            card.addEventListener('click', function() {
-                showProductModal(card, index);
-            });
+                card.addEventListener('click', function() {
+                    showProductModal(card, index);
+                });
         });
         
         // Sayfanın sonuna modal ekle

@@ -103,9 +103,9 @@
         <div class="container">
             <h2>İşitme Cihazı Tipine Göre Modellerimiz</h2>
             <div class="category-options">
-                <div class="category-option" data-category="kulak-ici">
-                    <img src="../assets/images/urunler/oticon/oticon-kulak-ici-c.jpg" alt="Kulak İçi İşitme Cihazları">
-                    <div class="category-label">Kulak İçi İşitme Cihazları</div>
+                <div class="category-option" data-category="kulak-arkasi">
+                    <img src="../assets/images/urunler/oticon/oticon-kulak-disi-c-2.jpg" alt="Kulak Arkası İşitme Cihazları">
+                    <div class="category-label">Kulak Arkası İşitme Cihazları</div>
                 </div>
                 <div class="category-option" data-category="kulak-disi">
                     <img src="../assets/images/urunler/oticon/oticon-kulak-disi-c.jpg" alt="Kulak Arkası İşitme Cihazları">
@@ -204,12 +204,55 @@
             <p class="section-description">Oticon Play PX, farklı yaş gruplarına ve işitme kaybı derecelerine uygun çeşitli modellerle sunulmaktadır. Çocuğunuzun ihtiyaçlarına en uygun modeli belirlemek için uzmanlarımız size yardımcı olacaktır.</p>
             
             <div class="series-container">
-                <div class="series-box" data-category="kulak-disi">
+                <div class="series-box" data-category="kulak-arkasi">
                     <div class="series-image">
-                        <img src="../assets/images/urunler/oticon/oticon-play-px-1.jpg" alt="Oticon Play PX miniRITE R">
+                        <img src="../assets/images/urunler/oticon/oticon-play-px-2.jpg" alt="Oticon Play PX BTE Kulak Arkası İşitme Cihazı">
                     </div>
                     <div class="series-content">
-                        <h3>Oticon Play PX miniRITE R</h3>
+                        <h3>Oticon Play PX BTE (Kulak Arkası)</h3>
+                        <p>Güçlü performans sunan kulak arkası model. İleri ve çok ileri derece işitme kayıpları için geliştirilmiş yüksek amplifikasyon sunar. Dayanıklı yapısı ile çocukların aktif yaşamına uygundur.</p>
+                        
+                        <div class="series-features">
+                            <div class="series-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Yüksek amplifikasyon</span>
+                            </div>
+                            <div class="series-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Bluetooth bağlantı</span>
+                            </div>
+                            <div class="series-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>IP68 su ve toz dayanıklılığı</span>
+                            </div>
+                            <div class="series-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Güçlü işlemci</span>
+                            </div>
+                            <div class="series-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>LED durum göstergesi</span>
+                            </div>
+                            <div class="series-feature">
+                                <i class="fas fa-check-circle"></i>
+                                <span>12 farklı renk seçeneği</span>
+                            </div>
+                        </div>
+                        
+                        <div class="series-models">
+                            <strong>Uygun Olduğu Yaş Grubu:</strong> 2-12 yaş arası çocuklar<br>
+                            <strong>İşitme Kaybı Derecesi:</strong> Orta-ileri ila çok ileri derece işitme kayıpları
+                        </div>
+                        <a href="../assets/pdf/oticon-play-px-ka-2.pdf" class="detail-button" target="_blank">Tüm Detaylar</a>
+                    </div>
+                </div>
+
+                <div class="series-box" data-category="kulak-disi">
+                    <div class="series-image">
+                        <img src="../assets/images/urunler/oticon/oticon-play-px-1.jpg" alt="Oticon Play PX miniRITE Kulak Arkası İşitme Cihazı">
+                    </div>
+                    <div class="series-content">
+                        <h3>Oticon Play PX miniRITE (Kulak Arkası)</h3>
                         <p>Şarj edilebilir, küçük ve şık tasarımlı kulak arkası model. Hafif ve konforlu yapısı ile çocukların günlük kullanımına uygundur. Tek şarjla tüm gün kullanım imkanı sağlar.</p>
                         
                         <div class="series-features">
@@ -243,11 +286,16 @@
                             <strong>Uygun Olduğu Yaş Grubu:</strong> 4-12 yaş arası çocuklar<br>
                             <strong>İşitme Kaybı Derecesi:</strong> Hafif ila ileri derece işitme kayıpları
                         </div>
+                        <a href="../assets/pdf/oticon-play-px-ka-1.pdf" class="detail-button" target="_blank">Tüm Detaylar</a>
                     </div>
                 </div>
             </div>
         </div>
+        
     </section>
+                
+            
+
     
     <!-- Ebeveynler ve Eğitimciler İçin -->
     <section class="product-accessories-section">
@@ -430,5 +478,50 @@
     </footer>
 
     <script src="../js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Category selection behavior for this page
+            const categoryOptions = document.querySelectorAll('.category-option');
+            const seriesBoxes = document.querySelectorAll('.series-box');
+
+            if (categoryOptions.length > 0 && seriesBoxes.length > 0) {
+                categoryOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        // Remove active class from all options
+                        categoryOptions.forEach(opt => opt.classList.remove('active'));
+                        
+                        // Add active class to clicked option
+                        this.classList.add('active');
+                        
+                        // Get the selected category
+                        const selectedCategory = this.getAttribute('data-category');
+                        
+                        // Show only the models matching the selected category
+                        seriesBoxes.forEach(box => {
+                            if (box.getAttribute('data-category') === selectedCategory) {
+                                box.style.display = 'flex';
+                            } else {
+                                box.style.display = 'none';
+                            }
+                        });
+                        
+                        // Scroll to models section
+                        setTimeout(() => {
+                            const seriesSection = document.querySelector('.product-series-section');
+                            if (seriesSection) {
+                                seriesSection.scrollIntoView({ behavior: 'smooth' });
+                            }
+                        }, 100);
+                    });
+                });
+
+                // Set first option as active by default
+                categoryOptions[0].classList.add('active');
+                
+                // Trigger click on the first option to show its models by default
+                categoryOptions[0].click();
+            }
+        });
+    </script>
 </body>
 </html> 
