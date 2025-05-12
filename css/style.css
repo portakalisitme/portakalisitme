@@ -282,8 +282,8 @@ nav ul li a:hover {
 
 .slide-content {
     position: absolute;
-    top: 60%;
-    right: 6%;
+    top: 50%;
+    right: 3%;
     left: auto;
     transform: translateY(-50%);
     max-width: 500px;
@@ -477,7 +477,6 @@ nav ul li a:hover {
 .product-modal {
     display: none;
 }
-
 /* Ürün Grupları */
 .products-section {
     padding: 70px 0;
@@ -2586,13 +2585,13 @@ footer {
 }
 
 .series-content {
-    padding: 20px;
-    flex: 1;
+    flex: 2;
+    padding: 30px;
 }
 
 .series-content h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 15px;
     color: #333;
 }
 
@@ -4182,30 +4181,4 @@ footer {
         width: 15px; /* Sol ve sağ kenarlarda boşluk */
         flex: 0 0 auto;
     }
-}
-
-.detail-button {
-    display: inline-block;
-    padding: 8px 16px;
-    background-color: #ff7f00;
-    color: white;
-    text-align: center;
-    font-weight: 500;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    margin-top: 10px;
-    float: right;
-}
-
-.detail-button:hover {
-    background-color: #e67300;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.series-content h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #333;
 }
