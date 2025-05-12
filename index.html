@@ -7,8 +7,10 @@
     <meta name="description" content="Portakal İşitme Cihazları - İşitme çözümleri ve işitme cihazları uzmanı. Phonak, Oticon, Philips, Rexton ve Unitron işitme cihazları.">
     <title>Portakal İşitme Cihazları</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mobile-menu.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="js/menu-fix.js"></script>
     <style>
         /* Header-Slider entegrasyonu için ek stiller */
         .header-slider-wrapper {
@@ -411,7 +413,7 @@
                         <li><a href="iletisim.html">İLETİŞİM</a></li>
                     </ul>
                 </nav>
-                <div class="menu-button">
+                <div class="menu-button" style="display: block; cursor: pointer; padding: 10px; font-size: 24px; z-index: 9999;" onclick="console.log('Menu button clicked inline');">
                     <i class="fas fa-bars"></i>
                 </div>
             </div>
@@ -786,5 +788,30 @@
     <script src="js/script.js"></script>
     <script src="js/lightbox.js"></script>
     <script src="js/mobile-menu.js"></script>
+    <script>
+        // Immediate menu button fix
+        (function() {
+            const menuBtn = document.querySelector('.menu-button');
+            const navMenu = document.querySelector('nav');
+            
+            if (menuBtn && navMenu) {
+                menuBtn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Direct inline menu click');
+                    
+                    if (navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                        document.body.style.overflow = '';
+                    } else {
+                        navMenu.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                    
+                    return false;
+                };
+            }
+        })();
+    </script>
 </body>
 </html> 
