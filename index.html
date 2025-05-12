@@ -167,15 +167,16 @@
             top: 50%;
             transform: translateY(-50%);
             max-width: 500px;
-            background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+            background: linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0.2));
             border-radius: 8px;
-            padding: 30px;
+            padding: 25px;
             color: white;
             z-index: 5;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
             text-align: left;
             margin-top: 30px;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         
         .slide-title {
@@ -184,6 +185,7 @@
             color: white;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
             font-weight: 700;
+            line-height: 1.2;
         }
         
         .slide-description {
@@ -349,13 +351,14 @@
         /* Mobil görünüm için ek stil düzenlemeleri */
         .mobile-slide-content {
             padding: 20px;
-            background-color: #fff;
+            background: linear-gradient(to right, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
             border-radius: 0 0 10px 10px;
             border: 1px solid #eee;
             border-top: none;
             position: relative;
             z-index: 30;
             text-align: left;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
         
         .mobile-slide-title {
@@ -392,40 +395,82 @@
             }
         }
         
-        /* Responsive ayarlamalar */
-        @media (max-width: 1200px) {
+        /* Responsive ayarlamalar - cihazlara göre iyileştirilmiş */
+        @media (min-width: 1600px) {
+            .slide-content {
+                max-width: 550px;
+                right: 8%;
+            }
+            
+            .slide-title {
+                font-size: 46px;
+            }
+        }
+        
+        @media (max-width: 1400px) {
             .slide-content {
                 max-width: 450px;
-                padding: 25px;
+                padding: 22px;
+                right: 5%;
             }
             
             .slide-title {
                 font-size: 36px;
+                margin-bottom: 12px;
             }
             
             .slide-description {
                 font-size: 16px;
+                margin-bottom: 18px;
             }
         }
         
-        @media (max-width: 992px) {
+        @media (max-width: 1200px) {
             .slide-content {
-                max-width: 400px;
+                max-width: 420px;
                 padding: 20px;
                 right: 4%;
             }
             
             .slide-title {
-                font-size: 30px;
+                font-size: 32px;
                 margin-bottom: 10px;
             }
             
             .slide-description {
                 font-size: 15px;
+            }
+            
+            .slide-features li {
+                font-size: 14px;
+                padding-left: 22px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .slide-content {
+                max-width: 380px;
+                padding: 18px;
+                right: 3%;
+            }
+            
+            .slide-title {
+                font-size: 28px;
+                margin-bottom: 8px;
+            }
+            
+            .slide-description {
+                font-size: 14px;
                 margin-bottom: 15px;
             }
             
             .slide-features li {
+                font-size: 13px;
+                padding: 4px 0;
+                padding-left: 20px;
+            }
+            
+            .slide-features li:before {
                 font-size: 14px;
             }
         }
@@ -434,20 +479,22 @@
             .slide-content {
                 max-width: 90%;
                 right: 5%;
+                left: 5%;
                 padding: 15px;
             }
             
             .slide-title {
-                font-size: 26px;
+                font-size: 24px;
             }
             
             .slide-description {
-                font-size: 14px;
+                font-size: 13px;
+                margin-bottom: 12px;
             }
             
             .slide-features li {
-                padding-left: 20px;
-                font-size: 13px;
+                font-size: 12px;
+                padding-left: 18px;
             }
         }
     </style>
