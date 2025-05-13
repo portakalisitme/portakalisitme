@@ -498,10 +498,11 @@ nav ul li a:hover {
 }
 
 .product-cards {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 30px;
     justify-content: center;
+    margin: 40px 0;
 }
 
 .product-card {
@@ -512,9 +513,8 @@ nav ul li a:hover {
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
     transition: transform 0.3s, box-shadow 0.3s;
-    margin-bottom: 25px;
     position: relative;
-    padding-bottom: 60px; /* Buton için alan açılıyor */
+    height: 100%;
 }
 
 .product-card:hover {
@@ -526,12 +526,16 @@ nav ul li a:hover {
     position: relative;
     overflow: hidden;
     background-color: #f5f5f5;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
     transition: transform 0.4s ease;
 }
 
@@ -551,12 +555,14 @@ nav ul li a:hover {
     font-size: 20px;
     margin: 0 0 10px;
     color: #333;
+    text-align: center;
 }
 
 .product-card p {
     color: #666;
     margin-bottom: 15px;
     flex-grow: 1;
+    text-align: center;
 }
 
 .product-features {
@@ -564,6 +570,7 @@ nav ul li a:hover {
     flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 20px;
+    justify-content: center;
 }
 
 .product-features span {
@@ -581,30 +588,116 @@ nav ul li a:hover {
     color: white;
 }
 
-.product-card .btn {
-    padding: 10px 25px;
-    font-size: 14px;
+.features-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px auto;
     background-color: #ff7f00;
     color: white;
     border-radius: 30px;
-    transition: all 0.3s ease;
     font-weight: 600;
-    letter-spacing: 0.5px;
     text-align: center;
-    align-self: flex-start;
-    margin: 0;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    align-self: center;
     box-shadow: 0 3px 10px rgba(255, 127, 0, 0.2);
 }
 
-.product-card .btn:hover {
+.features-button:hover {
     background-color: #e67300;
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(255, 127, 0, 0.3);
 }
 
-@media (min-width: 992px) {
-    .product-card .btn {
-        padding: 10px 25px;
+/* Mobil görünüm için iyileştirilmiş tasarım */
+@media (max-width: 991px) {
+    .products-section {
+        padding: 60px 0;
+    }
+    
+    .products-section .container {
+        padding: 0 15px;
+    }
+    
+    .product-cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 0;
+        margin: 30px 0;
+        overflow: visible;
+    }
+    
+    .product-card {
+        margin: 0;
+        height: 100%;
+    }
+    
+    .product-image {
+        height: 160px;
+    }
+    
+    .product-content {
+        padding: 15px;
+    }
+    
+    .product-card h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+    
+    .product-card p {
+        font-size: 13px;
+        line-height: 1.4;
+        margin-bottom: 10px;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    .product-features {
+        gap: 6px;
+        margin-bottom: 15px;
+    }
+    
+    .product-features span {
+        font-size: 11px;
+        padding: 4px 10px;
+    }
+    
+    .features-button {
+        padding: 8px 15px;
+        font-size: 12px;
+        margin: 8px auto;
+    }
+}
+
+/* Çok küçük mobil ekranlar için düzenleme */
+@media (max-width: 576px) {
+    .product-cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .product-image {
+        height: 180px;
+    }
+    
+    .product-card h3 {
+        font-size: 18px;
+    }
+    
+    .product-card p {
+        font-size: 14px;
+    }
+    
+    .product-features span {
+        padding: 5px 10px;
+    }
+    
+    .features-button {
+        padding: 8px 20px;
         font-size: 14px;
     }
 }
@@ -4086,51 +4179,33 @@ footer {
     
     .product-cards {
         display: flex;
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding: 15px;
+        flex-direction: column;
         gap: 20px;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none; /* Firefox için scrollbar gizle */
-        -ms-overflow-style: none; /* IE ve Edge için scrollbar gizle */
-        scroll-behavior: smooth;
-        margin: 0;
+        padding: 0;
+        margin: 20px 0;
         width: 100%;
-        position: relative;
-        cursor: grab;
-        -webkit-overflow-scrolling: touch; /* iOS için dokunma desteği */
-        scroll-padding: 15px;
-        padding-right: 15px;
-        padding-left: 15px;
-    }
-    
-    .product-cards::-webkit-scrollbar {
-        display: none; /* Chrome, Safari ve Opera için scrollbar gizle */
     }
     
     .product-card {
-        flex: 0 0 280px;
-        min-width: 280px;
-        scroll-snap-align: center; /* Merkez noktaya göre snap yapma */
+        flex: none;
+        width: 100%;
         margin-bottom: 0;
         box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         border-radius: 10px;
         overflow: hidden;
         background-color: #fff;
-        opacity: 1; /* Tüm kartlar baştan görünür olsun */
-    }
-    
-    /* Tüm kartlara aynı özellikleri uygula */
-    .product-card:first-child,
-    .product-card:last-child {
-        scroll-snap-align: center;
+        display: flex;
+        flex-direction: row;
+        height: 160px;
     }
     
     .product-image {
-        height: 180px;
+        height: 160px;
+        width: 40%;
+        min-width: 140px;
         background: white;
-        padding: 10px;
+        padding: 5px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -4138,14 +4213,20 @@ footer {
     }
     
     .product-image img {
-        max-height: 160px;
+        max-height: 150px;
         max-width: 100%;
+        width: 100%;
         object-fit: contain;
         transition: transform 0.3s ease;
     }
     
     .product-content {
         padding: 15px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: space-between;
+        width: 60%;
     }
     
     .product-card h3 {
@@ -4155,46 +4236,77 @@ footer {
     }
     
     .product-card p {
-        font-size: 13px;
+        font-size: 12px;
         line-height: 1.4;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
-        height: 55px;
     }
     
     .product-features {
         display: flex;
         flex-wrap: wrap;
         gap: 5px;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
     
     .product-features span {
-        font-size: 11px;
-        padding: 4px 8px;
+        font-size: 10px;
+        padding: 3px 6px;
         background-color: #f7f7f7;
         border-radius: 20px;
         color: #555;
     }
     
-    .product-card .btn {
-        padding: 8px 20px;
-        font-size: 13px;
+    .product-card .features-button {
+        padding: 6px 15px;
+        font-size: 12px;
         display: inline-block;
         width: auto;
+        margin: 0 auto;
+        align-self: center;
+        text-align: center;
+    }
+}
+
+/* Çok küçük mobil ekranlar için düzenleme */
+@media (max-width: 576px) {
+    .product-card {
+        height: auto;
+        flex-direction: column;
     }
     
-    /* Kaydırma davranışını iyileştir */
-    /* Ekranın solunda ve sağında önbelleğe alınmış alanlar oluştur */
-    .product-cards::before,
-    .product-cards::after {
-        content: '';
-        width: 15px; /* Sol ve sağ kenarlarda boşluk */
-        flex: 0 0 auto;
+    .product-image {
+        width: 100%;
+        height: 160px;
+    }
+    
+    .product-content {
+        width: 100%;
+        padding: 12px;
+    }
+    
+    .product-card h3 {
+        font-size: 16px;
+        text-align: center;
+    }
+    
+    .product-card p {
+        font-size: 13px;
+        text-align: center;
+        -webkit-line-clamp: 3;
+    }
+    
+    .product-features {
+        justify-content: center;
+    }
+    
+    .features-button {
+        margin: 5px auto;
+        align-self: center;
     }
 }
 
