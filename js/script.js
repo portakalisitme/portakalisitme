@@ -831,6 +831,53 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Kategori etiketlerini ekleyelim
     addCategoryTags();
+
+    // İletişim Formu Gönderimi
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('form-status');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const data = new FormData(form);
+            const action = form.action;
+            const submitButton = form.querySelector('button[type="submit"]');
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'Gönderiliyor...';
+            
+            fetch(action, {
+                method: 'POST',
+                body: data,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    formStatus.innerHTML = "Mesajınız başarıyla gönderildi. Teşekkürler!";
+                    formStatus.style.color = 'green';
+                    form.reset();
+                } else {
+                    response.json().then(data => {
+                        if (Object.hasOwn(data, 'errors')) {
+                            formStatus.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                        } else {
+                            formStatus.innerHTML = "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.";
+                        }
+                        formStatus.style.color = 'red';
+                    })
+                }
+            }).catch(error => {
+                formStatus.innerHTML = "Bir hata oluştu. Lütfen daha sonra tekrar deneyin.";
+                formStatus.style.color = 'red';
+            }).finally(() => {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Gönder';
+            });
+        });
+    }
 });
 
 // Ürün kartlarındaki görüntüleri ortala
@@ -1224,26 +1271,20 @@ function initTestimonialSlider() {
 
 // Kategori etiketlerini ekleyen fonksiyon
 function addCategoryTags() {
-    // Tüm ürün kartlarını seçelim
     const seriesBoxes = document.querySelectorAll('.series-box');
-    
-    // Her kart için kategori etiketi ekleyelim
     seriesBoxes.forEach(box => {
         const category = box.getAttribute('data-category');
         if (category) {
-            const categoryTag = document.createElement('div');
-            categoryTag.className = `category-tag ${category}`;
-            
-            // Kategori adını Türkçe'ye çevirelim
-            let categoryText = 'Kategori';
+            const tag = document.createElement('div');
+            tag.className = 'category-tag';
             if (category === 'kulak-ici') {
-                categoryText = 'Kulak İçi';
+                tag.textContent = 'Kulak İçi';
             } else if (category === 'kulak-disi') {
-                categoryText = 'Kulak Arkası';
+                tag.textContent = 'Kulak Arkası';
+            } else if (category === 'kulak-arkasi') {
+                tag.textContent = 'Kulak Arkası';
             }
-            
-            categoryTag.textContent = categoryText;
-            box.appendChild(categoryTag);
+            box.appendChild(tag);
         }
     });
 } 

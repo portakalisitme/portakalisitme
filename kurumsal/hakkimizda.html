@@ -232,8 +232,9 @@
                     </div>
                     <div class="social-icons">
                         <a href="https://wa.me/+905399273505" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/portakalisitmemerkezi07" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://x.com/portakalisitme" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/portakalisitmemerkezi07/" target="_blank"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
@@ -308,10 +309,10 @@
         <div class="container">
             <div class="about-content-wrapper">
                 <div class="about-text-content">
-                    <h2>Portakal İşitme Cihazları</h2>
-                    <p>Portakal İşitme Cihazları olarak 2005 yılından bu yana işitme sağlığı alanında hizmet vermekteyiz. Antalya'da başlayan yolculuğumuz, bugün Türkiye'nin farklı şehirlerinde hizmet veren şubelerimizle devam etmektedir.</p>
+                    <h2>Portakal İşitme Merkezi</h2>
+                    <p>Portakal İşitme Merkezi olarak 2018 yılından bu yana işitme sağlığı alanında hizmet vermekteyiz. İşitme sağlığı alanında dünya markaları ile yaptığımız ticari ortaklıklar sayesinde müşterilimize son teknoloji ürünlerini en kısa sürede deneyimleme fırsatı sağlamaktayız.</p>
                     
-                    <p>Uzman kadromuz ve geniş ürün yelpazemizle, her yaştan ve her ihtiyaçtan hastamıza en kaliteli hizmeti sunmak için çalışıyoruz. İşitme sağlığı alanında dünya lideri markaların Türkiye yetkili distribütörü olarak, hastalarımıza en gelişmiş teknolojileri sunuyoruz.</p>
+                    <p>Uzman kadromuz ve geniş ürün yelpazemizle ile her yaştan müşterimize en kaliteli hizmeti sunmak için çalışıyoruz. </p>
                     
                     <h3>Değerlerimiz</h3>
                     <div class="importance-points">
@@ -360,13 +361,24 @@
                 <div class="about-image-wrapper">
                     <!-- Buraya şirket binası, ekip veya ofis görüntüsü gelecek -->
                      
-                    <img src="../assets/images/kurumsal/portakal-ofis.jpg" alt="Portakal İşitme Cihazları Ofisi" class="about-main-image">
+                    <img src="../assets/images/kurumsal/dis-mekan.jpg" alt="Portakal İşitme Cihazları Ofisi" class="about-main-image">
                     
                     <div class="about-image-gallery">
-                        <!-- Buraya şirkete ait 3 görselden oluşan mini galeri gelecek -->
-                        <img src="../assets/images/kurumsal/portakal-ofis.jpg" alt="Uzman Ekibimiz">
-                        <img src="../assets/images/kurumsal/portakal-ofis.jpg" alt="Modern Ofisimiz">
-                        <img src="../assets/images/kurumsal/portakal-ofis.jpg" alt="Kaliteli Hizmet">
+                        <a href="../assets/images/kurumsal/ic-1.jpeg" class="gallery-link" data-title="İlk Mağazamız - 2005">
+                            <img src="../assets/images/kurumsal/ic-1.jpeg" alt="Mağazamız - 2005">
+                        </a>
+                        <a href="../assets/images/kurumsal/ic-3.jpeg" class="gallery-link" data-title="Uzman Ekibimiz">
+                            <img src="../assets/images/kurumsal/ic-3.jpeg" alt="Uzman Ekibimiz">
+                        </a>
+                        <a href="../assets/images/kurumsal/ic-5.jpeg" class="gallery-link" data-title="Marka İşbirlikleri - 2008">
+                            <img src="../assets/images/kurumsal/ic-5.jpeg" alt="Marka İşbirlikleri - 2008">
+                        </a>
+                        <a href="../assets/images/kurumsal/ic-7.jpeg" class="gallery-link" data-title="Yeni Mağazamız - 2015">
+                            <img src="../assets/images/kurumsal/ic-7.jpeg" alt="Yeni Mağazamız - 2015">
+                        </a>
+                        <a href="../assets/images/kurumsal/ic-9.jpeg" class="gallery-link" data-title="Yeni Mağazamız - 2015">
+                            <img src="../assets/images/kurumsal/ic-9.jpeg" alt="Yeni Mağazamız - 2015">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -516,10 +528,10 @@
             const lightboxImg = document.getElementById('lightbox-image');
             const lightboxCaption = document.getElementById('lightbox-caption');
             const lightboxClose = document.querySelector('.lightbox-close');
-            const certificateLinks = document.querySelectorAll('.certificate-link');
+            const galleryLinks = document.querySelectorAll('.gallery-link, .certificate-link');
             
-            // Sertifika görsellerine tıklandığında
-            certificateLinks.forEach(function(link) {
+            // Galeri ve sertifika görsellerine tıklandığında
+            galleryLinks.forEach(function(link) {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     
