@@ -475,7 +475,7 @@
                 </div>
                 
                 <div class="about-image-wrapper">
-                    <img src="../assets/images/kurumsal/kalite-politikasi.jpg" alt="Portakal İşitme Kalite Politikası" class="about-main-image">
+                    <img src="../assets/images/kurumsal/kalite-politikasi.jpg" alt="Portakal İşitme Merkezi Kalite Politikası" class="about-main-image">
                     
                     <div class="about-stats-section">
                         <h3>Kalite Rakamlarla</h3>
@@ -504,24 +504,27 @@
                         <h3>Kalite Sertifikalarımız</h3>
                         <div class="certificates-container">
                             <figure class="certificate-item">
-                                <a href="../assets/images/kurumsal/kalite-sertifikasi-3.jpg" class="certificate-link" data-title="ISO 9001 Kalite Sertifikası">
-                                    <img src="../assets/images/kurumsal/kalite-sertifikasi-3.jpg" alt="ISO Sertifikası">
+                                <a class="certificate-link" data-src="../assets/images/kurumsal/kalite-sertifikasi-1.jpg"
+                                    data-caption="Kalite Sertifikası 1">
+                                    <img src="../assets/images/kurumsal/kalite-sertifikasi-1.jpg" alt="Kalite Sertifikası 1 - Portakal İşitme Merkezi">
                                 </a>
-                                <figcaption>ISO 9001 Kalite Sertifikası</figcaption>
+                                <figcaption>Kalite Sertifikası 1</figcaption>
                             </figure>
                             
                             <figure class="certificate-item">
-                                <a href="../assets/images/kurumsal/kalite-sertifikasi-2.jpg" class="certificate-link" data-title="TSE Hizmet Yeterlilik Belgesi">
-                                    <img src="../assets/images/kurumsal/kalite-sertifikasi-2.jpg" alt="TSE Sertifikası">
+                                <a class="certificate-link" data-src="../assets/images/kurumsal/kalite-sertifikasi-2.jpg"
+                                    data-caption="Kalite Sertifikası 2">
+                                    <img src="../assets/images/kurumsal/kalite-sertifikasi-2.jpg" alt="Kalite Sertifikası 2 - Portakal İşitme Merkezi">
                                 </a>
-                                <figcaption>TSE Hizmet Yeterlilik Belgesi</figcaption>
+                                <figcaption>Kalite Sertifikası 2</figcaption>
                             </figure>
                             
                             <figure class="certificate-item">
-                                <a href="../assets/images/kurumsal/kalite-sertifikasi-1.jpg" class="certificate-link" data-title="OHSAS 18001 İş Güvenliği">
-                                    <img src="../assets/images/kurumsal/kalite-sertifikasi-1.jpg" alt="OHSAS Sertifikası">
+                                <a class="certificate-link" data-src="../assets/images/kurumsal/kalite-sertifikasi-3.jpg"
+                                    data-caption="Kalite Sertifikası 3">
+                                    <img src="../assets/images/kurumsal/kalite-sertifikasi-3.jpg" alt="Kalite Sertifikası 3 - Portakal İşitme Merkezi">
                                 </a>
-                                <figcaption>OHSAS 18001 İş Güvenliği</figcaption>
+                                <figcaption>Kalite Sertifikası 3</figcaption>
                             </figure>
                         </div>
                     </div>
@@ -623,8 +626,8 @@
                     e.preventDefault();
                     
                     // Görsel kaynağını ve başlığını al
-                    const imgSrc = this.getAttribute('href');
-                    const imgTitle = this.getAttribute('data-title');
+                    const imgSrc = this.getAttribute('data-src');
+                    const imgTitle = this.getAttribute('data-caption');
                     
                     // Lightbox'ı göster
                     lightbox.style.display = 'block';
