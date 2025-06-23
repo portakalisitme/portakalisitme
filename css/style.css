@@ -1988,12 +1988,79 @@ footer {
     padding: 60px 0;
 }
 
-.service-intro {
+.service-content-wrapper {
     display: flex;
-    flex-wrap: wrap;
+    align-items: flex-start;
     gap: 40px;
     margin-bottom: 50px;
+}
+
+.service-text-content {
+    flex: 1;
+    min-width: 0; /* Flex item'larının küçülmesine izin verir */
+}
+
+.service-image-content {
+    flex: 0 0 45%; /* Resim alanının genişliği */
+    max-width: 45%;
+    position: sticky;
+    top: 120px; /* Header yüksekliğine göre ayarlayın */
+}
+
+.service-image-content .service-main-image {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.service-text-content h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.service-text-content h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 70px;
+    height: 3px;
+    background-color: #ff7f00;
+}
+
+.service-text-content h3 {
+    font-size: 22px;
+    color: #444;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.service-text-content p, 
+.service-text-content li {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.8;
+}
+
+.service-text-content ol, 
+.service-text-content ul {
+    padding-left: 20px;
+}
+
+.service-text-content strong {
+    color: #ff7f00;
+    font-weight: 600;
+}
+
+.service-intro {
+    display: flex;
     align-items: center;
+    gap: 40px;
+    margin-bottom: 50px;
 }
 
 .service-intro-content {
@@ -2231,7 +2298,7 @@ footer {
 .service-faq h2:after {
     content: '';
     position: absolute;
-    width: 60px;
+    width: 70px;
     height: 3px;
     background-color: #ff7f00;
     bottom: -10px;
@@ -2239,7 +2306,8 @@ footer {
 }
 
 .faq-container {
-    margin-top: 30px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .faq-item {
@@ -2408,13 +2476,23 @@ footer {
     }
     
     .values-container {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .service-content-wrapper {
+        flex-direction: column;
+    }
+
+    .service-image-content {
+        position: static;
+        flex: 1;
+        max-width: 100%;
     }
 }
 
 @media (max-width: 768px) {
     .page-header {
-        padding: 30px 0;
+        padding: 40px 0;
     }
     
     .page-header h1 {
@@ -2426,6 +2504,7 @@ footer {
     }
     
     .about-image-wrapper, .service-intro-image, .importance-image, .appointment-image {
+        margin-top: 30px;
         order: -1;
     }
     
