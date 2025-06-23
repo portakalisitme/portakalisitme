@@ -486,6 +486,11 @@
             const seriesBoxes = document.querySelectorAll('.series-box');
 
             if (categoryOptions.length > 0 && seriesBoxes.length > 0) {
+                // Hide all series boxes initially
+                seriesBoxes.forEach(box => {
+                    box.style.display = 'none';
+                });
+
                 categoryOptions.forEach(option => {
                     option.addEventListener('click', function() {
                         // Remove active class from all options
@@ -515,12 +520,6 @@
                         }, 100);
                     });
                 });
-
-                // Set first option as active by default
-                categoryOptions[0].classList.add('active');
-                
-                // Trigger click on the first option to show its models by default
-                categoryOptions[0].click();
             }
         });
     </script>

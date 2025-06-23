@@ -517,7 +517,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // Philips kartının pozisyonuna kaydır
             const scrollOffset = (cardWidth + cardGap) * philipsIndex - 15;
             
-            // İlk başta sıfırla ve sonra doğru pozisyona getir
+            // İlk başta sıfırla ve sonra doğru pozisyonu getir
             productCards.scrollLeft = 0;
             
             // Kısa bir gecikme ile tam pozisyonu ayarla
@@ -779,20 +779,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const seriesBoxes = document.querySelectorAll('.series-box');
     
     if (categoryOptions.length > 0 && seriesBoxes.length > 0) {
-        // Sayfa yüklendiğinde varsayılan olarak 'kulak-disi' kategorisini aktif et
-        let activeCategory = 'kulak-disi';
-        const defaultCategory = document.querySelector('.category-option[data-category="kulak-disi"]');
-        if (defaultCategory) {
-            defaultCategory.classList.add('active');
-        }
-        
         // Kategori seçeneklerine tıklama olaylarını ekle
         categoryOptions.forEach(option => {
             option.addEventListener('click', function() {
                 const category = this.getAttribute('data-category');
-                
-                // Tüm seçeneklerin 'active' sınıfını kaldır
-                categoryOptions.forEach(opt => opt.classList.remove('active'));
                 
                 // Tıklanan seçeneği aktif et
                 this.classList.add('active');
@@ -814,18 +804,12 @@ document.addEventListener('DOMContentLoaded', function() {
                         box.style.display = 'none';
                     }
                 });
-                
-                // Aktif kategoriyi güncelle
-                activeCategory = category;
             });
         });
         
-        // Sayfa ilk yüklendiğinde varsayılan kategoriye göre ürünleri filtrele
+        // Sayfa ilk yüklendiğinde tüm ürünleri gizle
         seriesBoxes.forEach(box => {
-            const boxCategory = box.getAttribute('data-category');
-            if (boxCategory !== activeCategory) {
-                box.style.display = 'none';
-            }
+            box.style.display = 'none';
         });
     }
 
@@ -916,16 +900,14 @@ function ensureImageIsCentered(img) {
 // Mobil cihazlar için ürün kartları büyütme özelliği
 function setupProductCards() {
     if (window.innerWidth <= 768) {
-        // Ürün kartları büyütme düğmesi ekle
-        const productCards = document.querySelectorAll('.product-card');
+        // Ürün kartları büyüteç özelliği kaldırıldı
         
+        // Kart tıklaması için fonksiyonu ekle
+        const productCards = document.querySelectorAll('.product-card');
         productCards.forEach((card, index) => {
-            // Büyüteç özelliği kaldırıldı
-                
-            // Kart tıklaması için fonksiyonu ekle
-                card.addEventListener('click', function() {
-                    showProductModal(card, index);
-                });
+            card.addEventListener('click', function() {
+                showProductModal(card, index);
+            });
         });
         
         // Sayfanın sonuna modal ekle
